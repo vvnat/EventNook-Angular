@@ -18,13 +18,13 @@ export class LoginComponent {
   }
 
   onLogin(){
-    this.http.post("http://localhost:8888/api/v1/authenticate", this.loginObj).subscribe((res:any)=>{
-      if(res.result){
-        alert("Login Success");
-      }else{
-        alert(res.message)
+    this.http.post("http://localhost:8888/api/v1/authenticate", this.loginObj).subscribe({
+      next: (data: any) => {
+        this.router.navigateByUrl("/home", {state: {data: data}});
+      }});
+      error: (error: any) => {
+        console.log(error);
       }
-    });
   }
 }
 
