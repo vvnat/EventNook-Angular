@@ -1,0 +1,29 @@
+<main>
+    <section class="form-section">
+      <img src="/assets/svg/logo.svg" alt="logo">
+      <h2>Login</h2>
+      <ng-content></ng-content>
+      <form action="#">
+        <input type="username" [(ngModel)]="loginObj.username" name="Username" placeholder="Nombre de usuario">
+        <input type="password" [(ngModel)]="loginObj.password" name="Password" placeholder="Contraseña">
+        <div class="btn-wrapper">
+            <button class="btn-primary" (click)="onLogin()"> Entrar </button>
+        </div>
+      </form>
+      <div class="btn-wrapper">
+        
+        <div class="divider">
+          <div></div>
+          <span>o</span>
+          <div>
+          </div>
+        </div>
+        <h3>¿No tienes cuenta?</h3>
+        <button class="btn-secondary">Registrarse</button>
+    </div>
+    </section>
+    <section class="main-section">
+      <h1>Expande tu entusiasmo por los eventos</h1>
+      <img src="../../../assets/svg/disco-ball-dance-svgrepo-com.svg" alt="">
+    </section>
+  </main>
