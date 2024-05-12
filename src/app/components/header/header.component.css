@@ -1,6 +1,15 @@
 div{
-    min-height: 10pxxx;
+    min-height: 60px;
     min-width: 100vh;
-    background-color: black;
+    background-color: #5ED4A2;
     color: white;
+    display: flex;
+    align-items: center;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    padding-left: 16px;
+}
+img{
+    box-sizing: border-box;
+    max-width: 200px;
 }
