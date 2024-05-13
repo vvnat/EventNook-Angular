@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
+import { EventService } from '../../services/event.service';
+import { Event } from '../../types/Event';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +10,22 @@ import { HeaderComponent } from '../../components/header/header.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  protected events: Event[] = [];
 
+  constructor(
+    private eventService: EventService
+  ) { }
+
+  ngOnInit(): void {
+      this.eventService.findAllByUser(2).subscribe({
+        next: (response: Event[]) => {
+          console.log(response);
+          this.events = response;
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      })
+  }
 }

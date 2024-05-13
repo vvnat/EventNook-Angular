@@ -1,4 +1,8 @@
 <body>
     <app-header></app-header>
-    
+    <h1>Tus eventos</h1>
+    @for (event of events; track event.id) {
+        <p>Creador:{{event.creatorId}}</p>
+        <p>Fecha del evento:{{event.startDate}}</p>
+    }
 </body>
