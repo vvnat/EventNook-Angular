@@ -15,6 +15,8 @@ import { User } from '../../types/User';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginError: boolean = false;
+  submited: boolean = false;
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -26,6 +28,7 @@ export class LoginComponent {
   ) { }
 
   onLogin() {
+    this.submited = true;
     const form: LoginForm = {
       username: this.loginForm.value.username ?? '',
       password: this.loginForm.value.password ?? ''
@@ -38,6 +41,7 @@ export class LoginComponent {
       },
       error: (error: any) => {
         console.log(error);
+        this.loginError = true;
       }
     })
   }

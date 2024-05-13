@@ -5,7 +5,13 @@
       <ng-content></ng-content>
       <form [formGroup]="loginForm" (submit)="onLogin()">
         <input type="username" name="Username" placeholder="Nombre de usuario" formControlName="username">
+        @if (loginForm.controls.username.invalid && submited) {
+          <p class="error">{{getUsernameErrors()}}</p>
+        }
         <input type="password" name="Password" placeholder="Contraseña" formControlName="password">
+        @if (loginForm.controls.password.invalid && submited) {
+          <p class="error">{{getPasswordErrors()}}</p>
+        }
         <div class="btn-wrapper">
             <button class="btn-primary"> Entrar </button>
         </div>
