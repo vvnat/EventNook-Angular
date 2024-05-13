@@ -3,11 +3,11 @@
       <img src="/assets/svg/logo.svg" alt="logo">
       <h2>Login</h2>
       <ng-content></ng-content>
-      <form action="#">
-        <input type="username" [(ngModel)]="loginObj.username" name="Username" placeholder="Nombre de usuario">
-        <input type="password" [(ngModel)]="loginObj.password" name="Password" placeholder="Contraseña">
+      <form [formGroup]="loginForm" (submit)="onLogin()">
+        <input type="username" name="Username" placeholder="Nombre de usuario" formControlName="username">
+        <input type="password" name="Password" placeholder="Contraseña" formControlName="password">
         <div class="btn-wrapper">
-            <button class="btn-primary" (click)="onLogin()"> Entrar </button>
+            <button class="btn-primary"> Entrar </button>
         </div>
       </form>
       <div class="btn-wrapper">

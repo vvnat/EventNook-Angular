@@ -1,38 +1,54 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { LoginForm } from '../../types/LoginForm';
+import { User } from '../../types/User';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginForm = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  })
 
-  loginObj: Login;
-  constructor(private http: HttpClient, private router: Router){
-    this.loginObj = new Login("","");
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  onLogin(){
-    this.http.post("http://localhost:8888/api/v1/authenticate", this.loginObj).subscribe({
-      next: (data: any) => {
-        this.router.navigateByUrl("/home", {state: {data: data}});
-      }});
+  onLogin() {
+    const form: LoginForm = {
+      username: this.loginForm.value.username ?? '',
+      password: this.loginForm.value.password ?? ''
+    }
+
+    this.authService.login(form).subscribe({
+      next: (data: User) => {
+        this.router.navigate(["/home"]);
+        console.log(data);
+      },
       error: (error: any) => {
         console.log(error);
       }
+    })
   }
-}
 
-export class Login{
-  username: string;
-  password: string;
-  constructor(username: string, password: string){
-    this.username = username;
-    this.password = password;
+  getUsernameErrors() {
+    if (this.loginForm.controls.username.hasError('required')) return 'El campo es requerido.';
+    return '';
+  }
+
+  getPasswordErrors() {
+    if (this.loginForm.controls.password.hasError('required')) return 'El campo es requerido.';
+    return '';
   }
 }
