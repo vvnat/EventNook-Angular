@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
+import { SpaceService } from '../../services/space.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit{
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
 
   constructor(
-    private eventService: EventService
+    private eventService: EventService,
+    public spaceService: SpaceService
   ) { }
 
   ngOnInit(): void {

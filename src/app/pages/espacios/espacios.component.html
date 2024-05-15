@@ -1,21 +1,25 @@
 <body>
     <app-header></app-header>
-    <main>
-        <h1>Nuestros espacios</h1>
-        <section>
-            @for (space of spaces; track space.id) {
-                <article>
-                    <a href="">
-                        <h3>{{space.name}}</h3>
-                        <img src="{{space.image}}" alt="{{space.name}}">
-                        <div>
-                            <p>{{space.description}}</p>
-                            <p>{{space.capacity}} personas</p>
-                            <p>{{space.price}} €/día</p>
-                        </div>
-                    </a>
-                </article>
-            }
-        </section>
-    </main>
+<main>
+    <h1>Nuestros espacios</h1>
+    <section>
+        @for (space of getPagedSpaces(); track space.id) {
+            <article>
+                <a href="">
+                  <h3>{{ space.name }}</h3>
+                  <img [src]="space.image" [alt]="space.name">
+                  <div>
+                    <p>{{ space.description }}</p>
+                    <p>Aforo: {{ space.capacity }} personas</p>
+                    <p>{{ space.price }} €/día</p>
+                  </div>
+                </a>
+              </article>
+        }  
+    </section>
+    <div>
+      <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
+      <button (click)="nextPage()">Siguiente</button>
+    </div>
+  </main>
 </body>
