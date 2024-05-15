@@ -1,8 +1,89 @@
 <body>
     <app-header></app-header>
-    <h1>Tus eventos</h1>
+    <nav>
+        <a href="crearEvento.html">Crear evento</a>
+        <a href="explorar.html">Explorar</a>
+    </nav>
+    <main>
+        <div>
+        <h2>Tus eventos</h2>
+        <section>
     @for (event of events; track event.id) {
-        <p>Creador:{{event.creatorId}}</p>
-        <p>Fecha del evento:{{event.startDate}}</p>
+        @if (events.length==0) {
+            <h4>Parece que aún no has creado ningún evento</h4>
+        }
+        @else {
+
+            <article>
+                <h4>@switch (event.eventType) {
+                    @case (0) {
+                        {{eventTypes[0]}}
+                    }
+                    @case (1) {
+                        {{eventTypes[1]}}
+                    }
+                    @case (2) {
+                        {{eventTypes[2]}}
+                    }
+                    @case (3) {
+                        {{eventTypes[3]}}
+                    }
+                    }</h4>
+    
+                    <p>Se celebra en: 
+                        @if (event.spaceId==null) {
+                            {{event.restaurantId}}}
+                        @else {
+                            {{event.spaceId}}
+                        }
+                    </p>
+                    <p>Día: {{event.startDate}}</p>
+                    <p>{{event.guestsNumber}} invitados</p>
+                </article>
+        }
     }
+    </section>
+</div>
+<div>
+    <h2>Explora nuestros servicios</h2>
+    <section>
+        <article class="tarjeta">
+            <a href="">
+                <img src="../../../assets/icons/espacios.png" alt="espacios">
+                <div>
+                    <h4>Espacios</h4>
+                    <p>Conoce los establecimientos que colaboran con nosotros.</p>
+                </div>
+            </a>
+        </article>
+        <article class="tarjeta">
+            <a href="">
+                <img src="../../../assets/icons/caterings.png" alt="caterings">
+            <div>
+                <h4>Caterings</h4>
+                <p>Explora las distintas empresas de catering y las opciones gastronómicas que ofrecen.</p>
+            </div>
+            </a>
+        </article>
+        <article class="tarjeta">
+            <a href="">
+                <img src="../../../assets/icons/musicos.png" alt="musicos">
+            <div>
+                <h4>Músicos</h4>
+                <p>Conoce a los distintos artistas y técnicos de sonido que ofrecen sus servicios en nuestros eventos.</p>
+            </div>
+            </a>
+        </article>
+        <article class="tarjeta">
+            <a href="">
+                <img src="../../../assets/icons/restaurantes.png" alt="espacios">
+            <div>
+                <h4>Restaurantes</h4>
+                <p>Conoce los restaurantes que colaboran con nosotros.</p>
+            </div>
+            </a>
+        </article>
+    </section>
+</div>
+    </main>
 </body>

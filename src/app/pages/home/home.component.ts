@@ -13,6 +13,8 @@ import { Event } from '../../types/Event';
 export class HomeComponent implements OnInit{
   protected events: Event[] = [];
 
+  protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
+
   constructor(
     private eventService: EventService
   ) { }
