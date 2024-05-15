@@ -3,7 +3,7 @@
 <main>
     <h1>Nuestros espacios</h1>
     <section>
-        @for (space of getPagedSpaces(); track space.id) {
+        @for (space of spaces; track space.id) {
             <article>
                 <a href="">
                   <h3>{{ space.name }}</h3>
@@ -15,11 +15,11 @@
                   </div>
                 </a>
               </article>
-        }  
+        }
     </section>
     <div>
-      <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
-      <button (click)="nextPage()">Siguiente</button>
+      <!-- <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
+      <button (click)="nextPage()">Siguiente</button> -->
     </div>
   </main>
 </body>

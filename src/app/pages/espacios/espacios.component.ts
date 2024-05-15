@@ -23,10 +23,6 @@ export class EspaciosComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.loadSpaces();
-  }
-
-  loadSpaces(): void {
     this.spaceService.findAll().subscribe({
       next: (response: Space[]) => {
         console.log(response);
@@ -35,24 +31,9 @@ export class EspaciosComponent implements OnInit{
       error: (error: any) => {
         console.log(error);
       }
-    });
+    })
   }
 
-  getPagedSpaces(): Space[] {
-    const startIndex = this.pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.spaces.slice(startIndex, endIndex);
-  }
-
-  nextPage(): void {
-    this.pageIndex++;
-  }
-
-  prevPage(): void {
-    if (this.pageIndex > 0) {
-      this.pageIndex--;
-    }
-  }
   spaceById(spaceId: number): void {
     this.spaceService.findById(spaceId).subscribe({
       next: (response: Space) => {

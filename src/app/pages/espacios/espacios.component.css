@@ -6,6 +6,15 @@
   p{
     font-size: 14px;
   }
+
+  img{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    width: 80%;
+    height: 65%;
+    object-fit: cover;
+    
+  }
   
   nav{
     display: flex;
@@ -29,7 +38,7 @@
   
   main{
     padding: 8px;
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -119,11 +128,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        section:nth-of-type(2)>img {
-            width: 200px;
-            margin-top: 50px;
-        }
     }
 
     article{

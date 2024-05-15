@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
 import { SpaceService } from '../../services/space.service';
+import { get } from 'http';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { SpaceService } from '../../services/space.service';
 })
 export class HomeComponent implements OnInit{
   protected events: Event[] = [];
+  protected spaceName: string = "";
 
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
 
@@ -31,5 +33,18 @@ export class HomeComponent implements OnInit{
           console.log(error);
         }
       })
+  }
+
+  getSpaceName(spaceId: number): void {
+    this.spaceService.findById(spaceId).subscribe({
+      next: (space: any) => {
+        console.log(space);
+        this.spaceName = space.name;
+        return this.spaceName;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
   }
 }

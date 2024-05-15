@@ -13,39 +13,36 @@
 
 
     @for (event of events; track event.id) {
-        @if (events.length==0) {
-            <h4>Parece que aún no has creado ningún evento</h4>
-        }
-        @else {
-
             <article>
                 <h4>@switch (event.eventType) {
-                    @case (0) {
-                        {{eventTypes[0]}}
-                    }
-                    @case (1) {
-                        {{eventTypes[1]}}
-                    }
-                    @case (2) {
-                        {{eventTypes[2]}}
-                    }
-                    @case (3) {
-                        {{eventTypes[3]}}
-                    }
+                        @case (0) {
+                            {{eventTypes[0]}}
+                        }
+                        @case (1) {
+                            {{eventTypes[1]}}
+                        }
+                        @case (2) {
+                            {{eventTypes[2]}}
+                        }
+                        @case (3) {
+                            {{eventTypes[3]}}
+                        }
                     }</h4>
     
                     <p>Se celebra en: 
                         @if (event.spaceId==null) {
                             {{event.restaurantId}}}
                         @else {
-                            {{event.spaceId}}
+                            {{spaceName}}
                         }
                     </p>
                     <p>Día: {{event.startDate}}</p>
                     <p>{{event.guestsNumber}} invitados</p>
                 </article>
         }
-    }
+        @empty {
+            <h4>Parece que aún no has creado ningún evento</h4>
+        }
     </section>
 }
 </div>
