@@ -113,6 +113,7 @@
     cursor:pointer;
   }
   @media screen and (max-width: 768px){
+    
     main {
         width: 85%;
         flex-direction: column;
