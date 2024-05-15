@@ -6,8 +6,13 @@
     </nav>
     <main>
         <div>
-        <h2>Tus eventos</h2>
-        <section>
+            @if (events.length==0) {
+                <h2>Parece que aún no has creado ningún evento</h2>
+            }@else {
+                <h2>Tus eventos</h2>
+                <section>
+
+
     @for (event of events; track event.id) {
         @if (events.length==0) {
             <h4>Parece que aún no has creado ningún evento</h4>
@@ -43,6 +48,7 @@
         }
     }
     </section>
+}
 </div>
 <div>
     <h2>Explora nuestros servicios</h2>
