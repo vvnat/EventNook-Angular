@@ -34,7 +34,7 @@
                         @if (event.spaceId==null) {
                             {{event.restaurantId}}}
                         @else {
-                            {{(spaceService.findById(event.spaceId))}}
+                            {{spaceName}}
                         }
                     </p>
                     <p>Día: {{event.startDate}}</p>

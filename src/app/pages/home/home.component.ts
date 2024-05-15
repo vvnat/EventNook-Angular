@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit{
 
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
 
+  event: Event|any;
+  spaceName: string | any;
+
   constructor(
     private eventService: EventService,
     public spaceService: SpaceService
@@ -31,5 +34,14 @@ export class HomeComponent implements OnInit{
           console.log(error);
         }
       })
+
+      this.spaceService.findById(this.event.spaceId).subscribe({
+        next: (space) => {
+          this.spaceName = space.name;
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
   }
 }
