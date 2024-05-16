@@ -12,6 +12,7 @@ import {Space} from '../../types/Space';
 })
 export class EspaciosComponent implements OnInit{
   protected spaces: Space[] = [];
+  protected paginatedSpaces: Space[] = [];
 
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
 
@@ -32,6 +33,7 @@ export class EspaciosComponent implements OnInit{
         console.log(error);
       }
     })
+    this.paginatedSpaces = this.spaces.slice(this.pageIndex, this.pageSize);
   }
 
   spaceById(spaceId: number): void {
@@ -44,5 +46,15 @@ export class EspaciosComponent implements OnInit{
         console.log(error);
       }
     })
+  }
+
+  nextPage(): void {
+    this.pageIndex += this.pageSize;
+    this.paginatedSpaces = this.spaces.slice(this.pageIndex, this.pageIndex + this.pageSize);
+  }
+
+  prevPage(): void {
+    this.pageIndex -= this.pageSize;
+    this.paginatedSpaces = this.spaces.slice(this.pageIndex, this.pageIndex + this.pageSize);
   }
 }
