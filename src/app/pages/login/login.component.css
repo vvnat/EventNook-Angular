@@ -175,5 +175,8 @@ main {
                 }
             }
         }
+        .main-section{
+            display: none;
+        }
     }
 }

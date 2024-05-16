@@ -13,3 +13,9 @@ img{
     box-sizing: border-box;
     max-width: 200px;
 }
+@media (max-width: 768px){
+    img{
+        max-width: 150px;
+    }
+    
+}
