@@ -1,7 +1,7 @@
 <app-header></app-header>
 <app-nav></app-nav>
 <main>
-    <h1>Nuestros espacios</h1>
+    <h1>Nuestros restaurantes</h1>
     <section>
         @for (restaurant of paginatedRestaurants; track restaurant.id) {
             <article>
@@ -11,7 +11,7 @@
                   <div>
                     <p>{{ restaurant.description }}</p>
                     <p>Aforo: {{ restaurant.capacity }} personas</p>
-                    <p>{{ restaurant.price }} €/día</p>
+                    <p>{{ restaurant.price }} €/persona</p>
                   </div>
                 </a>
               </article>

@@ -4,7 +4,7 @@ import { NavComponent } from '../../nav/nav.component';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
 import { SpaceService } from '../../services/space.service';
-import { get } from 'http';
+import { RestaurantService } from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +16,14 @@ import { get } from 'http';
 export class HomeComponent implements OnInit{
   protected events: Event[] = [];
   protected spaceName: string = "";
+  protected restaurantName: string = "";
 
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
 
   constructor(
     private eventService: EventService,
-    public spaceService: SpaceService
+    public spaceService: SpaceService,
+    public restaurantService: RestaurantService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit{
         }
       })
       this.getSpaceName(1);
+      this.getRestaurantName(1);
   }
 
   getSpaceName(spaceId: number): void {
@@ -43,6 +46,19 @@ export class HomeComponent implements OnInit{
         console.log(space);
         this.spaceName = space.name;
         return this.spaceName;
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
+  getRestaurantName(restaurantId: number): void {
+    this.restaurantService.findById(restaurantId).subscribe({
+      next: (restaurant: any) => {
+        console.log(restaurant);
+        this.restaurantName = restaurant.name;
+        return this.restaurantName;
       },
       error: (error: any) => {
         console.log(error);

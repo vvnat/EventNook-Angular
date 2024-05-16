@@ -47,4 +47,16 @@ export class RestaurantesComponent implements OnInit{
     this.paginatedRestaurants = this.restaurants.slice(this.pageIndex, this.pageIndex + this.pageSize);
   }
 
+  findByRestaurantId(restaurantId: number): void {
+    this.restaurantService.findById(restaurantId).subscribe({
+      next: (response: Restaurant) => {
+        console.log(response);
+        this.restaurants = [response];
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+  }
+
 }
