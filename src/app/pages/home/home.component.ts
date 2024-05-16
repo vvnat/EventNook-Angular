@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
+import { NavComponent } from '../../nav/nav.component';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
 import { SpaceService } from '../../services/space.service';
@@ -8,7 +9,7 @@ import { get } from 'http';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, NavComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
