@@ -1,0 +1,24 @@
+<app-header></app-header>
+<app-nav></app-nav>
+<main>
+    <h1>Nuestros espacios</h1>
+    <section>
+        @for (restaurant of paginatedRestaurants; track restaurant.id) {
+            <article>
+                <a href="">
+                  <h3>{{ restaurant.name }}</h3>
+                  <img [src]="restaurant.image" [alt]="restaurant.name">
+                  <div>
+                    <p>{{ restaurant.description }}</p>
+                    <p>Aforo: {{ restaurant.capacity }} personas</p>
+                    <p>{{ restaurant.price }} €/día</p>
+                  </div>
+                </a>
+              </article>
+        }
+    </section>
+    <div>
+      <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
+      <button (click)="nextPage()">Siguiente</button>
+    </div>
+  </main>
