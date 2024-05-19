@@ -8,7 +8,7 @@ import { CateringsComponent } from './pages/caterings/caterings.component';
 export const routes: Routes = [
   {
     path: '',
-    component: EspaciosComponent,
+    component: HomeComponent,
   },
   {
     path: 'login',

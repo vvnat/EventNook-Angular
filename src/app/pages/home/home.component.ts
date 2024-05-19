@@ -5,11 +5,12 @@ import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
 import { SpaceService } from '../../services/space.service';
 import { RestaurantService } from '../../services/restaurant.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, NavComponent],
+  imports: [HeaderComponent, NavComponent,RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

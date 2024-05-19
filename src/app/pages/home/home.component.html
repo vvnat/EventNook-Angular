@@ -11,20 +11,7 @@
 
     @for (event of events; track event.id) {
             <article>
-                <h4>@switch (event.eventType) {
-                        @case (0) {
-                            {{eventTypes[0]}}
-                        }
-                        @case (1) {
-                            {{eventTypes[1]}}
-                        }
-                        @case (2) {
-                            {{eventTypes[2]}}
-                        }
-                        @case (3) {
-                            {{eventTypes[3]}}
-                        }
-                    }</h4>
+                <h4>{{this.eventTypes[event.eventType]}}</h4>
     
                     <p>Se celebra en: 
                         @if (event.spaceId==null) {
@@ -47,7 +34,7 @@
     <h2>Explora nuestros servicios</h2>
     <section>
         <article class="tarjeta">
-            <a href="">
+            <a routerLink="/spaces">
                 <img src="/assets/icons/espacios.png" alt="espacios">
                 <div>
                     <h4>Espacios</h4>
