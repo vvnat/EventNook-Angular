@@ -5,15 +5,15 @@
     <section>
         @for (space of paginatedSpaces; track space.id) {
             <article>
-                <a href="">
                   <h3>{{ space.name }}</h3>
                   <img [src]="space.image" [alt]="space.name">
                   <div>
                     <p>{{ space.description }}</p>
                     <p>Aforo: {{ space.capacity }} personas</p>
                     <p>{{ space.price }} €/día</p>
+                    <p>Dirección: {{space.address}}</p>
+                    <p>Contacto: {{space.contactNumber}}</p>
                   </div>
-                </a>
               </article>
         }
     </section>

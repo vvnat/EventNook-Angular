@@ -5,13 +5,12 @@
     <section>
         @for (catering of paginatedCaterings; track catering.id) {
             <article>
-                <a href="">
                   <h3>{{ catering.name }}</h3>
                   <div>
                     <p>{{ catering.description }}</p>
                     <p>{{ catering.price }} €/persona</p>
+                    <p>Contacto: {{catering.contactNumber}}</p>
                   </div>
-                </a>
               </article>
         }
     </section>
