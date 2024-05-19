@@ -27,12 +27,12 @@ export class CateringsComponent implements OnInit{
       next: (response: Catering[]) => {
         console.log(response);
         this.caterings = response;
+        this.paginatedCaterings = this.caterings.slice(this.pageIndex, this.pageSize);
       },
       error: (error: any) => {
         console.log(error);
       }
     })
-    this.paginatedCaterings = this.caterings.slice(this.pageIndex, this.pageSize);
   }
 
   nextPage(): void {

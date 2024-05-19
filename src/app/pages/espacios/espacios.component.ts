@@ -29,12 +29,12 @@ export class EspaciosComponent implements OnInit{
       next: (response: Space[]) => {
         console.log(response);
         this.spaces = response;
+        this.paginatedSpaces = this.spaces.slice(this.pageIndex, this.pageSize);
       },
       error: (error: any) => {
         console.log(error);
       }
     })
-    this.paginatedSpaces = this.spaces.slice(this.pageIndex, this.pageSize);
   }
 
   spaceById(spaceId: number): void {

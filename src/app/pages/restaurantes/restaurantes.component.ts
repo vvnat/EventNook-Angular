@@ -29,12 +29,12 @@ export class RestaurantesComponent implements OnInit{
       next: (response: Restaurant[]) => {
         console.log(response);
         this.restaurants = response;
+        this.paginatedRestaurants = this.restaurants.slice(this.pageIndex, this.pageSize);
       },
       error: (error: any) => {
         console.log(error);
       }
     })
-    this.paginatedRestaurants = this.restaurants.slice(this.pageIndex, this.pageSize);
   }
 
   nextPage(): void {
