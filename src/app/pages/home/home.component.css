@@ -70,6 +70,9 @@ article{
     margin-top: 20px;
     margin-bottom: 0px;
   }
+  p{
+    width: 100%;  
+  }
 
 }
 
