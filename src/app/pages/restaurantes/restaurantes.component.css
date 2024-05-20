@@ -10,10 +10,11 @@ p{
 img{
   grid-column: 1/2;
   grid-row: 2/3;
-  width: 80%;
-  height: 65%;
+  width: 280px;
+  height: 150px;
   object-fit: cover;
   margin-top: 8%;
+  margin-right: 16px;
 }
 
 main{
