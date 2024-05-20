@@ -20,7 +20,7 @@
                             {{spaceName}}
                         }
                     </p>
-                    <p>Día: {{event.startDate}}</p>
+                    <p>Día: {{ event.startDate | date:'dd/MM/yyyy' }}</p>
                     <p>{{event.guestsNumber}} invitados</p>
                 </article>
         }
@@ -52,7 +52,7 @@
             </a>
         </article>
         <article class="tarjeta">
-            <a href="">
+            <a href="/musicians">
                 <img src="/assets/icons/musicos.png" alt="musicos">
             <div>
                 <h4>Músicos</h4>

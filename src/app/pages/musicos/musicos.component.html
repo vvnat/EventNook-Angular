@@ -1,0 +1,21 @@
+<app-header></app-header>
+<app-nav></app-nav>
+<main>
+    <h1>Nuestros músicos</h1>
+    <section>
+        @for (musician of paginatedMusicians; track musician.id) {
+            <article>
+                  <h3>{{ musician.name }}</h3>
+                  <div>
+                    <p>{{ musician.description }}</p>
+                    <p>{{ musician.price }} €/día</p>
+                    <p>Contacto: {{musician.contactNumber}}</p>
+                  </div>
+              </article>
+        }
+    </section>
+    <div>
+      <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
+      <button (click)="nextPage()">Siguiente</button>
+    </div>
+  </main>

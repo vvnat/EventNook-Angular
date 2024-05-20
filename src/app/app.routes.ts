@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { EspaciosComponent } from './pages/espacios/espacios.component';
 import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
 import { CateringsComponent } from './pages/caterings/caterings.component';
+import { MusicosComponent } from './pages/musicos/musicos.component';
 
 export const routes: Routes = [
   {
@@ -29,5 +30,9 @@ export const routes: Routes = [
   {
     path: 'caterings',
     component: CateringsComponent
+  },
+  {
+    path: 'musicians',
+    component: MusicosComponent
   }
 ];

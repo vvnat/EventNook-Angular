@@ -6,11 +6,12 @@ import { Event } from '../../types/Event';
 import { SpaceService } from '../../services/space.service';
 import { RestaurantService } from '../../services/restaurant.service';
 import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, NavComponent,RouterLink],
+  imports: [HeaderComponent, NavComponent,RouterLink, DatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
