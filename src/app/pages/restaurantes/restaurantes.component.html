@@ -19,6 +19,6 @@
     </section>
     <div>
       <button (click)="prevPage()" [disabled]="pageIndex === 0">Anterior</button>
-      <button (click)="nextPage()">Siguiente</button>
+      <button (click)="nextPage()" [disabled]="pageIndex === 6">Siguiente</button>
     </div>
   </main>

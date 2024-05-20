@@ -80,6 +80,11 @@ section+div button:first-of-type{
 section+div button:hover{
   cursor:pointer;
 }
+
+section+div button:disabled{
+  display: none;
+}
+
 @media screen and (max-width: 768px){
   
   main {
