@@ -4,7 +4,6 @@ import { EventService } from '../../services/event.service';
 import { RouterLink } from '@angular/router';
 import { Event } from '../../types/Event';
 import { DatePipe } from '@angular/common';
-import { Router } from '@angular/router';
 import { EventComponent } from '../../components/event/event.component';
 
 
