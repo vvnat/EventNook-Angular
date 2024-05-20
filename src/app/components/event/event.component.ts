@@ -36,11 +36,11 @@ export class EventComponent implements OnInit {
         console.log(error);
       }
     })
-    this.getSpaceName(1);
-    this.getRestaurantName(1);
+    this.findSpaceNameById(this.event.spaceId||0);
+    this.getRestaurantName(this.event.restaurantId||0);
 }
 
-getSpaceName(spaceId: number): void {
+findSpaceNameById(spaceId: number): void {
   this.spaceService.findById(spaceId).subscribe((space) => {
     this.spaceName = space.name;
   });
