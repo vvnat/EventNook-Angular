@@ -1,0 +1,14 @@
+<article>
+    <h4>{{this.eventTypes[event.eventType]}}</h4>
+    <img src="" alt="">
+        <p>Se celebra en: 
+            @if (event.restaurantId != null) {
+                {{restaurantName}}
+            }
+            @else if (event.spaceId != null){
+                {{spaceName}}
+            }
+        </p>
+        <p>Día: {{ event.startDate | date:'dd/MM/yyyy' }}</p>
+        <p>{{event.guestsNumber}} invitados</p>
+    </article>

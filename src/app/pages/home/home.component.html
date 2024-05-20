@@ -2,33 +2,15 @@
 <app-nav></app-nav>
     <main>
         <div>
-            @if (events.length==0) {
-                <h2>Parece que aún no has creado ningún evento</h2>
-            }@else {
-                <h2>Tus eventos</h2>
-                <section>
-
-
-    @for (event of events; track event.id) {
-            <article>
-                <h4>{{this.eventTypes[event.eventType]}}</h4>
-                <img src="" alt="">
-                    <p>Se celebra en: 
-                        @if (event.spaceId==null) {
-                            {{restaurantName}}}
-                        @else {
-                            {{spaceName}}
-                        }
-                    </p>
-                    <p>Día: {{ event.startDate | date:'dd/MM/yyyy' }}</p>
-                    <p>{{event.guestsNumber}} invitados</p>
-                </article>
-        }
-        @empty {
-            <h4>Parece que aún no has creado ningún evento</h4>
-        }
+            <section>
+            <h2>Tus eventos</h2>
+                @for (event of events; track event.id) {
+                <app-event [event]="event"></app-event>
+            }
+            @empty {
+                <h4>Parece que aún no has creado ningún evento</h4>
+            }
     </section>
-}
 </div>
 <div>
     <h2>Explora nuestros servicios</h2>

@@ -2,69 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { NavComponent } from '../../nav/nav.component';
 import { EventService } from '../../services/event.service';
-import { Event } from '../../types/Event';
-import { SpaceService } from '../../services/space.service';
-import { RestaurantService } from '../../services/restaurant.service';
 import { RouterLink } from '@angular/router';
+import { Event } from '../../types/Event';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { EventComponent } from '../../components/event/event.component';
+
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [HeaderComponent, NavComponent,RouterLink, DatePipe],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css',
+    imports: [HeaderComponent, NavComponent, RouterLink, DatePipe, EventComponent]
 })
-export class HomeComponent implements OnInit{
-  protected events: Event[] = [];
-  protected spaceName: string = "";
-  protected restaurantName: string = "";
-
-  protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
+export class HomeComponent {
+  events: Event[] = [];
 
   constructor(
-    private eventService: EventService,
-    public spaceService: SpaceService,
-    public restaurantService: RestaurantService
+    private eventService: EventService
   ) { }
 
   ngOnInit(): void {
-      this.eventService.findAllByUser(2).subscribe({
-        next: (response: Event[]) => {
-          console.log(response);
-          this.events = response;
-        },
-        error: (error: any) => {
-          console.log(error);
-        }
-      })
-      this.getSpaceName(1);
-      this.getRestaurantName(1);
+    this.findEventsByUser(1);
   }
 
-  getSpaceName(spaceId: number): void {
-    this.spaceService.findById(spaceId).subscribe({
-      next: (space: any) => {
-        console.log(space);
-        this.spaceName = space.name;
-        return this.spaceName;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
-  }
-
-  getRestaurantName(restaurantId: number): void {
-    this.restaurantService.findById(restaurantId).subscribe({
-      next: (restaurant: any) => {
-        console.log(restaurant);
-        this.restaurantName = restaurant.name;
-        return this.restaurantName;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
+  findEventsByUser(userId: number): void {
+    this.eventService.findAllByUser(userId).subscribe(events => {
+      this.events = events;
+    });
   }
 }

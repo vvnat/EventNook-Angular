@@ -17,4 +17,8 @@ export class EventService {
   findAllByUser(userId: number): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.url}/events/${userId}`);
   }
+
+  findAll(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.url}/events`);
+  }
 }
