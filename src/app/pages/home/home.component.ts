@@ -23,7 +23,7 @@ export class HomeComponent {
   ) { }
 
   ngOnInit(): void {
-    this.findEventsByUser(8);
+    this.findEventsByUser(1);
   }
 
   findEventsByUser(userId: number): void {
