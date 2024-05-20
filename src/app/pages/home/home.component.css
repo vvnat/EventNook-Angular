@@ -49,6 +49,18 @@ h2+h4{
   font-weight: 400;
 }
 
+h4+a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 200px;
+}
+
+h4+a img{
+  filter: opacity(0.8);
+}
+
 section{
   width: 100%;
 }
