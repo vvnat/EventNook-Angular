@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { NavComponent } from '../../nav/nav.component';
 import { MusicianService } from '../../services/musician.service';
 import { Musician } from '../../types/Musician';
 
 @Component({
   selector: 'app-musicos',
   standalone: true,
-  imports: [HeaderComponent, NavComponent],
+  imports: [HeaderComponent],
   templateUrl: './musicos.component.html',
   styleUrl: './musicos.component.css'
 })

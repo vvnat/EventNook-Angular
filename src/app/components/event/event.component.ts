@@ -16,6 +16,8 @@ import { DatePipe } from '@angular/common';
 export class EventComponent implements OnInit {
   @Input() event: Event = {} as Event;
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
+  protected spaceImageUrl: string = "";
+  protected restaurantImageUrl: string = "";
   protected events: Event[] = [];
   protected spaceName: string = "";
   protected restaurantName: string = "";
@@ -36,8 +38,10 @@ export class EventComponent implements OnInit {
         console.log(error);
       }
     })
-    this.findSpaceNameById(this.event.spaceId||0);
-    this.getRestaurantName(this.event.restaurantId||0);
+    this.findSpaceNameById(this.event.spaceId||1);
+    this.getRestaurantName(this.event.restaurantId||1);
+    this.getSpaceImageUrl(this.event.spaceId||1);
+    this.getRestaurantImageUrl(this.event.restaurantId||1);
 }
 
 findSpaceNameById(spaceId: number): void {
@@ -49,6 +53,18 @@ findSpaceNameById(spaceId: number): void {
 getRestaurantName(restaurantId: number): void {
   this.restaurantService.findById(restaurantId).subscribe((restaurant) =>{
     this.restaurantName = restaurant.name;
+  });
+}
+
+getSpaceImageUrl(spaceId: number): void {
+  this.spaceService.findById(spaceId).subscribe((space) => {
+    this.spaceImageUrl = space.image;
+  });
+}
+getRestaurantImageUrl(restaurantId: number): void {
+  this.restaurantService.findById(restaurantId).subscribe((restaurant) => {
+    this.restaurantImageUrl = restaurant.image;
+    console.log(this.restaurantImageUrl);
   });
 }
 }

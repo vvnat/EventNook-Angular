@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { NavComponent } from '../../nav/nav.component';
 import { EventService } from '../../services/event.service';
 import { RouterLink } from '@angular/router';
 import { Event } from '../../types/Event';
@@ -14,7 +13,7 @@ import { EventComponent } from '../../components/event/event.component';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, NavComponent, RouterLink, DatePipe, EventComponent]
+    imports: [HeaderComponent, RouterLink, DatePipe, EventComponent]
 })
 export class HomeComponent {
   events: Event[] = [];

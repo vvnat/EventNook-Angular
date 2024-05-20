@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { NavComponent } from '../../nav/nav.component';
 import { CateringService } from '../../services/catering.service';
 import { Catering } from '../../types/Catering';
 
 @Component({
   selector: 'app-caterings',
   standalone: true,
-  imports: [HeaderComponent, NavComponent],
+  imports: [HeaderComponent],
   templateUrl: './caterings.component.html',
   styleUrl: './caterings.component.css'
 })

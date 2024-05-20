@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { NavComponent } from '../../nav/nav.component';
 import {SpaceService} from '../../services/space.service';
 import {Space} from '../../types/Space';
 
 @Component({
   selector: 'app-espacios',
   standalone: true,
-  imports: [HeaderComponent, NavComponent],
+  imports: [HeaderComponent],
   templateUrl: './espacios.component.html',
   styleUrl: './espacios.component.css'
 })

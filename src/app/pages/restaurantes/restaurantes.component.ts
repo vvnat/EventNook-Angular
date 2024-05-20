@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { NavComponent } from '../../nav/nav.component';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Restaurant } from '../../types/Restaurant';
 
@@ -8,7 +7,7 @@ import { Restaurant } from '../../types/Restaurant';
 @Component({
   selector: 'app-restaurantes',
   standalone: true,
-  imports: [HeaderComponent, NavComponent],
+  imports: [HeaderComponent],
   templateUrl: './restaurantes.component.html',
   styleUrl: './restaurantes.component.css'
 })
