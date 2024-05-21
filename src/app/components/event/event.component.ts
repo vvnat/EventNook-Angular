@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './event.component.html',
   styleUrl: './event.component.css'
 })
+
 export class EventComponent implements OnInit {
   @Input() event: Event = {} as Event;
   protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
@@ -61,10 +62,11 @@ getSpaceImageUrl(spaceId: number): void {
     this.spaceImageUrl = space.image;
   });
 }
+
 getRestaurantImageUrl(restaurantId: number): void {
   this.restaurantService.findById(restaurantId).subscribe((restaurant) => {
     this.restaurantImageUrl = restaurant.image;
-    console.log(this.restaurantImageUrl);
   });
 }
+
 }
