@@ -19,6 +19,14 @@ img {
     max-width: 200px;
 }
 
+a+a img{
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    margin-top: 2px;
+}
+
 a:first-of-type {
     text-decoration: none;
     color: black;
@@ -40,7 +48,7 @@ a:nth-of-type(2){
 }
 
 a:last-of-type{
-    margin-left: 63%;
+    margin-left: 64%;
 }
 
 @media (max-width: 768px) {

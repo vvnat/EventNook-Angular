@@ -30,7 +30,7 @@ export class EventComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.eventService.findAllByUser(8).subscribe({
+    this.eventService.findAll().subscribe({
       next: (response: Event[]) => {
         console.log(response);
         this.events = response;
