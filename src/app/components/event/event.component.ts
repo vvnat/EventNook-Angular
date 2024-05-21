@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
 
 export class EventComponent implements OnInit {
   @Input() event: Event = {} as Event;
-  protected eventTypes: string[] = ["Boda", "Cena de empresa","Congreso", "Concierto"];
+  protected eventTypes: string[] = ["Bodas y comuniones", "Cenas y comidas de empresa","Congresos, conferencias y charlas", "Conciertos"];
   protected spaceImageUrl: string = "";
   protected restaurantImageUrl: string = "";
   protected events: Event[] = [];

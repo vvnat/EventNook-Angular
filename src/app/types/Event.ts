@@ -9,5 +9,6 @@ export type Event = {
     cateringId: number | null;
     musicianId: number | null;
     open_bar: boolean;
-    guestsNumber: number
+    guestsNumber: number;
+    photographer: boolean;
   }
