@@ -17,9 +17,9 @@ import { UserService } from '../../services/user.service';
 export class HeaderComponent {
   cookieService: CookieService = inject(CookieService);
   userService: UserService = inject(UserService);
-  user: User = JSON.parse(this.cookieService.get('user'));
+ /* user: User = JSON.parse(this.cookieService.get('user'));
 
   username:string = this.user.username || "";
 
-  userImg:string = this.user.image ||"https://pub-075bb5be9b9a4349baac38abf6b858f4.r2.dev/user-default.png";
+  userImg:string = this.user.image ||"https://pub-075bb5be9b9a4349baac38abf6b858f4.r2.dev/user-default.png";*/
 }
