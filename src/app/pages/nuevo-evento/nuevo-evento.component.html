@@ -1,1 +1,16 @@
-<p>nuevo-evento works!</p>
+<app-header></app-header>
+<main>
+    <h2>Creación del evento</h2>
+    <h4>Selecciona el tipo de evento que deseas organizar:</h4>
+    <form [formGroup]="eventTypeForm" (submit)="onEventType()" class="eventTypeForm">
+        @for (eventType of eventTypes; track eventType) {
+            <div >
+                <input type="radio" id="{{eventType}}" name="eventType" value="{{eventType}}" formControlName="eventType">
+                <label for="{{eventType}}">{{eventType}}</label>
+            </div>
+        }
+        <div class="btn-wrapper">
+            <button class="btn-primary">Siguiente</button>
+        </div>
+    </form>
+</main>
