@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LoginForm } from '../../types/LoginForm';
 import { User } from '../../types/User';
+import { CookieService } from 'ngx-cookie-service';
+import { UserSignalService } from '../../services/user-signal.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,13 @@ import { User } from '../../types/User';
   imports: [
     ReactiveFormsModule
   ],
+  providers: [CookieService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+
+export class LoginComponent implements OnInit{
+  cookieService: CookieService = inject(CookieService);
   loginError: boolean = false;
   submited: boolean = false;
 
@@ -28,6 +33,14 @@ export class LoginComponent {
     private router: Router
   ) { }
 
+  
+  userSignalService: UserSignalService = inject(UserSignalService);
+  ngOnInit(): void {
+    if (this.userSignalService.user().id) {
+      this.router.navigate(["/home"])
+    }
+  }
+
   onLogin() {
     const fomrValue = this.loginForm.value;
     this.submited = true;
@@ -39,7 +52,12 @@ export class LoginComponent {
 
     this.authService.login(form).subscribe({
       next: (data: User) => {
-        this.router.navigate(["/home"]);
+        this.writeUserCookie(data as User);
+        this.userSignalService.updateUser(data as User);
+        setTimeout(() => {
+          this.router.navigate(["/home"])
+        }, 500);
+        /*this.router.navigate(["/home"]);*/
         console.log(data);
       },
       error: (error: any) => {
@@ -57,5 +75,9 @@ export class LoginComponent {
   getPasswordErrors() {
     if (this.loginForm.controls.password.hasError('required')) return 'El campo es requerido.';
     return '';
+  }
+
+  writeUserCookie(user: User) {
+    this.cookieService.set('user', JSON.stringify(user));
   }
 }

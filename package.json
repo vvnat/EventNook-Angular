@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.3",
     "express": "^4.18.2",
     "ngx-bootstrap": "^12.0.0",
+    "ngx-cookie-service": "^17.1.0",
     "ngx-select-dropdown": "^3.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
