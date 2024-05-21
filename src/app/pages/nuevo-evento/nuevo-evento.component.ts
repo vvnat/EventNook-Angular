@@ -12,8 +12,12 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent {
-  protected eventTypes: string[] = ["Bodas y comuniones", "Cenas y comidas de empresa","Congresos, conferencias y charlas", "Conciertos"];
-
+  protected eventTypes = [
+    { id: 1, name: 'Bodas y comuniones' },
+    { id: 2, name: 'Comidas y cenas de empresa' },
+    { id: 3, name: 'Congresos, conferencias y charlas' },
+    { id: 4, name: 'Conciertos' }
+  ];
   eventTypeForm = new FormGroup({
     name: new FormControl('')
   });

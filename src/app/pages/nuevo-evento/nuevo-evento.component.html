@@ -3,10 +3,10 @@
     <h2>Creación del evento</h2>
     <h4>Selecciona el tipo de evento que deseas organizar:</h4>
     <form [formGroup]="eventTypeForm" (submit)="onEventType()" class="eventTypeForm">
-        @for (eventType of eventTypes; track eventType) {
-            <div >
-                <input type="radio" id="{{eventType}}" name="eventType" value="{{eventType}}" formControlName="eventType">
-                <label for="{{eventType}}">{{eventType}}</label>
+        @for (eventType of eventTypes; track eventType.id) {
+            <div>
+                <input type="radio" id="{{eventType.id}}" name="eventType" value="{{eventType.name}}" formControlName="eventType">
+                <label for="{{eventType.id}}">{{eventType.name}}</label>
             </div>
         }
         <div class="btn-wrapper">
