@@ -172,7 +172,7 @@ export class RegistroComponent {
   userSignalService: UserSignalService = inject(UserSignalService);
   ngOnInit(): void {
     if (this.userSignalService.user().id) {
-      this.router.navigate(["/home"])
+      this.router.navigate(["/login"])
     }
   }
 

@@ -29,7 +29,7 @@
           <p class="error">{{getPasswordErrorMessage()}}</p>
         }
 
-        <input type="repeatPassword" name="repeatPassword" placeholder="Repetir contraseña" formControlName="repeatPassword">
+        <input type="password" name="repeatPassword" placeholder="Repetir contraseña" formControlName="repeatPassword">
         @if (registerForm.controls.repeatPassword.invalid && submited) {
           <p class="error">{{getRepeatPasswordErrorMessage()}}</p>
         }
@@ -47,7 +47,9 @@
           </div>
         </div>
         <h3>¿Ya tienes cuenta?</h3>
-        <button class="btn-secondary">Accede</button>
+        <a href="/login">
+          <button class="btn-secondary">Accede</button>
+        </a>
     </div>
     </section>
     <section class="main-section">

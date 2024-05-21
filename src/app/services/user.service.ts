@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../types/User";
 import { env } from "../env";
-import { RegisterForm } from "../types/RegisterForm.ts";
+import { RegisterForm } from "../types/RegisterForm";
 
 @Injectable({
   providedIn: 'root'
