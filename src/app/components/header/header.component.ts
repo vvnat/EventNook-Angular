@@ -5,11 +5,12 @@ import { MatOption } from '@angular/material/select';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../types/User';
 import { UserService } from '../../services/user.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatSelect, MatFormField, MatOption],
+  imports: [MatSelect, MatFormField, MatOption, RouterLink],
   providers: [CookieService],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

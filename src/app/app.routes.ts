@@ -6,6 +6,7 @@ import { RestaurantesComponent } from './pages/restaurantes/restaurantes.compone
 import { CateringsComponent } from './pages/caterings/caterings.component';
 import { MusicosComponent } from './pages/musicos/musicos.component';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { NuevoEventoComponent } from './pages/nuevo-evento/nuevo-evento.component';
 
 export const routes: Routes = [
   {
@@ -39,5 +40,9 @@ export const routes: Routes = [
   {
     path: 'musicians',
     component: MusicosComponent
+  },
+  {
+    path: 'crear',
+    component: NuevoEventoComponent
   }
 ];
