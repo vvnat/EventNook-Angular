@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lexend', sans-serif;
+}
+.error{
+    color: red;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+
+    section {
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    section:nth-of-type(2){
+        justify-content: start;
+        padding: 10%;
+    }
+
+    section:nth-of-type(2)>img {
+        width: 300px;
+        margin-top: 100px;
+    }
+
+    .main-section {
+        flex-grow: 1;
+        background-image: url('https://pub-075bb5be9b9a4349baac38abf6b858f4.r2.dev/evento%20general.jpg');
+        background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+        background-position: center; /* Centra la imagen de fondo */
+        background-repeat: no-repeat; /* No repite la imagen */
+
+        h1{
+            color: var(--custom-whitesmoke);
+            font-size: 40px;
+        }
+    }
+
+    form{
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        input {
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid #E5E5E5;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+    }
+
+    .form-section {
+        flex-grow: 2;
+        padding: 0 35px;
+
+        img {
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 45px;
+        }
+
+        .btn-wrapper {
+            display: flex;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 30px;
+
+            .divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                width: 100%;
+
+                font-size: 14px;
+                color: #5ED4A2;
+                font-weight: 400;
+                text-transform: uppercase;
+
+                div {
+                    flex-grow: 1;
+                    height: 2px;
+                    background-color: #5ED4A2;
+                }
+            }
+
+            button {
+                width: 100%;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: 500;
+                border: none;
+                background: transparent;
+                padding: 12px 24px;
+                cursor: pointer;
+                font-weight: bold;
+
+                &:disabled {
+                    opacity: 0.8;
+                }
+    
+                &.btn-primary {
+                    background-color: #5ED4A2;
+                    color: white;
+                    box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
+                }
+    
+                &.btn-secondary {
+                    box-shadow:0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
+                    border: 1px solid #5ED4A2;
+                    color:#5ED4A2;
+                }
+                &:hover{
+                    box-shadow:0px 8px 12px rgba(107, 44, 189, 0.2);
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px){
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+
+        section:nth-of-type(2){
+            height: 500px;
+        }
+        section:nth-of-type(2)>img {
+            width: 200px;
+            margin-top: 50px;
+        }
+
+        .form-section {
+            padding: 0 20px;
+            width: 80%;
+
+            img {
+                margin-bottom: 10px;
+                max-width: 300px;
+            }
+
+            h2 {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+
+            .btn-wrapper {
+                gap: 20px;
+
+                button {
+                    padding: 10px 20px;
+                }
+            }
+        }
+        .main-section{
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,56 @@
+<main>
+    <section class="form-section">
+      <img src="/assets/svg/logo.svg" alt="logo">
+      <h2>Registro</h2>
+      <ng-content></ng-content>
+      <form [formGroup]="registerForm" (submit)="onRegister()">
+        <input type="name" name="name" placeholder="Nombre" formControlName="name">
+        @if (registerForm.controls.name.invalid && submited) {
+          <p class="error">{{getNameErrorMessage()}}</p>
+        }
+
+        <input type="lastName" name="lastName" placeholder="Apellidos" formControlName="lastName">
+        @if (registerForm.controls.lastName.invalid && submited) {
+          <p class="error">{{getLastNameErrorMessage()}}</p>
+        }
+
+        <input type="username" name="Username" placeholder="Nombre de usuario" formControlName="username">
+        @if (registerForm.controls.username.invalid && submited) {
+          <p class="error">{{getUserNameErrorMessage()}}</p>
+        }
+
+        <input type="email" name="email" placeholder="Email" formControlName="email">
+        @if (registerForm.controls.email.invalid && submited) {
+          <p class="error">{{getEmailErrorMessage()}}</p>
+        }
+
+        <input type="password" name="Password" placeholder="Contraseña" formControlName="password">
+        @if (registerForm.controls.password.invalid && submited) {
+          <p class="error">{{getPasswordErrorMessage()}}</p>
+        }
+
+        <input type="repeatPassword" name="repeatPassword" placeholder="Repetir contraseña" formControlName="repeatPassword">
+        @if (registerForm.controls.repeatPassword.invalid && submited) {
+          <p class="error">{{getRepeatPasswordErrorMessage()}}</p>
+        }
+
+        <div class="btn-wrapper">
+            <button class="btn-primary"> Registrarme </button>
+        </div>
+      </form>
+      <div class="btn-wrapper">
+        
+        <div class="divider">
+          <div></div>
+          <span>o</span>
+          <div>
+          </div>
+        </div>
+        <h3>¿Ya tienes cuenta?</h3>
+        <button class="btn-secondary">Accede</button>
+    </div>
+    </section>
+    <section class="main-section">
+      <h1>Crea eventos a tu gusto, este es tu lugar</h1>
+    </section>
+  </main>

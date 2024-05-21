@@ -51,14 +51,14 @@ export class LoginComponent implements OnInit{
     }
 
     this.authService.login(form).subscribe({
-      next: (data: User) => {
-        this.writeUserCookie(data as User);
-        this.userSignalService.updateUser(data as User);
+      next: (user: User) => {
+        this.writeUserCookie(user as User);
+        this.userSignalService.updateUser(user as User);
         setTimeout(() => {
           this.router.navigate(["/home"])
         }, 500);
         /*this.router.navigate(["/home"]);*/
-        console.log(data);
+        console.log(user);
       },
       error: (error: any) => {
         console.log(error);

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "../types/User";
 import { env } from "../env";
+import { RegisterForm } from "../types/RegisterForm.ts";
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,9 @@ export class UserService{
     return this.http.get<User[]>(`${this.url}/users`);
     }
 
-   /* create(registerForm: RegisterForm): Observable<User> {
+   create(registerForm: RegisterForm): Observable<User> {
         return this.http.post<User>(`${this.url}/users`, registerForm);
-      }*/
+    }
 
     findById(userId: number): Observable<User> {
         return this.http.get<User>(`${this.url}/user/${userId}`);

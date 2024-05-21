@@ -5,15 +5,20 @@ import { EspaciosComponent } from './pages/espacios/espacios.component';
 import { RestaurantesComponent } from './pages/restaurantes/restaurantes.component';
 import { CateringsComponent } from './pages/caterings/caterings.component';
 import { MusicosComponent } from './pages/musicos/musicos.component';
+import { RegistroComponent } from './pages/registro/registro.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: LoginComponent,
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'registro',
+    component: RegistroComponent
   },
   {
     path: 'home',
