@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
-import { EventTypeForm } from '../../types/EventTypeForm';
+import { EventForm } from '../../types/EventForm';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -18,15 +18,35 @@ export class NuevoEventoComponent {
     { id: 3, name: 'Congresos, conferencias y charlas' },
     { id: 4, name: 'Conciertos' }
   ];
-  eventTypeForm = new FormGroup({
-    name: new FormControl('')
+  eventForm = new FormGroup({
+    eventType: new FormControl(),
+    startDate: new FormControl(),
+    endDate: new FormControl(),
+    spaceId: new FormControl(),
+    restaurantId: new FormControl(),
+    cateringId: new FormControl(),
+    musicianId: new FormControl(),
+    open_bar: new FormControl(),
+    guestsNumber: new FormControl(),
+    photographer: new FormControl()
   });
 
-  onEventType(): void {
-    const formValue = this.eventTypeForm.value;
+  onEventForm(): void {
+    const formValue = this.eventForm.value;
 
-    const form: EventTypeForm = {
-      name: this.eventTypeForm.value.name ?? ''
+    const form: EventForm = {
+      eventType: formValue.eventType,
+      startDate: formValue.startDate,
+      endDate: formValue.endDate,
+      guestsNumber: formValue.guestsNumber,
+      spaceId: null,
+      restaurantId: null,
+      cateringId: null,
+      musicianId: null,
+      open_bar: false,
+      photographer: false
     };
+
+    console.log(form);
   }
 }

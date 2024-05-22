@@ -47,6 +47,17 @@ form{
     z-index: 100 !important;
 }
 
+.fechas{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    h4{
+        width: 40%;
+    }
+}
+
 
 [type="radio"]:checked,
 [type="radio"]:not(:checked){
@@ -61,13 +72,13 @@ form{
 .checkbox-tools:not(:checked) + label{
 	position: relative;
 	padding: 20px;
-	width: 200px;
+	width: 20%;
 	font-size: 14px;
     margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-	border-radius: 4px;
+	border-radius: 10px;
 	overflow: hidden;
 	cursor: pointer;
 	color: var(--black);
@@ -112,8 +123,8 @@ form{
     box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
 }
 
-input[type="date"]{
-    width: 50%;
+input[type="datetime-local"]{
+    width: 40%;
     padding: 10px;
     margin: 10px;
     border-radius: 4px;
@@ -128,6 +139,20 @@ input[type="number"]{
     border-radius: 4px;
     border: 1px solid var(--light-gray);
     font-family: Lexend, sans-serif;
+}
+
+button{
+    width: 15%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    font-family: Lexend, sans-serif;
+    background-color: var(--green-1);
+    color: var(--dark-green);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 8px 12px rgba(79, 38, 133, 0.2);
 }
 
 @media (max-width: 768px){

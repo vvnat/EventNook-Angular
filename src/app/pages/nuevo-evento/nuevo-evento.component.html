@@ -3,24 +3,33 @@
     <h2>Creación del evento</h2>
     <section class="over-hide z-bigger">
         <h4>Selecciona el tipo de evento que deseas organizar:</h4>
-        <form [formGroup]="eventTypeForm" (submit)="onEventType()">
+        <form [formGroup]="eventForm" (submit)="onEventForm()">
 
-            <input type="radio" class="checkbox-tools" name="tipoEvento" id="0">
+            <input type="radio" class="checkbox-tools" name="eventType" id="0" value="0" formControlName="eventType">
             <label for="0" class="for-checkbox-tools">{{eventTypes[0].name}}</label>
-            <input type="radio" class="checkbox-tools" name="tipoEvento" id="1">
+
+            <input type="radio" class="checkbox-tools" name="eventType" id="1" value="1" formControlName="eventType">
             <label for="1" class="for-checkbox-tools">{{eventTypes[1].name}}</label>
-            <input type="radio" class="checkbox-tools" name="tipoEvento" id="2">
+
+            <input type="radio" class="checkbox-tools" name="eventType" id="2" value="2" formControlName="eventType">
             <label for="2" class="for-checkbox-tools">{{eventTypes[2].name}}</label>
-            <input type="radio" class="checkbox-tools" name="tipoEvento" id="3">
+
+            <input type="radio" class="checkbox-tools" name="eventType" id="3" value="3" formControlName="eventType">
             <label for="3" class="for-checkbox-tools">{{eventTypes[3].name}}</label>
 
-            <h4>Selecciona la fecha del evento: </h4>
-            <input type="date" required>
+            <div class="fechas">
+                <h4>Fecha de inicio: </h4>
+                <h4>Fecha de fin: </h4>
+
+                <input type="datetime-local" required formControlName="startDate">
+                <input type="datetime-local" required formControlName="endDate">
+            </div>
 
             <h4>Selecciona el número de invitados: </h4>
-            <input type="number" required>
-
+            <input type="number" required formControlName="guestsNumber">
             
+            <h4></h4>
+            <button type="submit">Continuar</button>
         </form>
     </section>
 </main>
