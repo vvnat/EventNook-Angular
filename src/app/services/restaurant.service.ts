@@ -21,4 +21,8 @@ import { env } from "../env";
     findById(restaurantId: number): Observable<Restaurant> {
       return this.http.get<Restaurant>(`${this.url}/restaurant/${restaurantId}`);
     }
+
+    findByCapacity(capacity: number): Observable<Restaurant[]> {
+      return this.http.get<Restaurant[]>(`${this.url}/restaurantsByCapacity/${capacity}`);
+    }
   }

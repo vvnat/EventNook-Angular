@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { EventForm } from '../../types/EventForm';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Space } from '../../types/Space';
+import { SpaceService } from '../../services/space.service';
 
 
 @Component({
@@ -12,12 +14,15 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent {
+  spaceService: SpaceService = inject(SpaceService);
+
   protected eventTypes = [
     { id: 1, name: 'Bodas y comuniones' },
     { id: 2, name: 'Comidas y cenas de empresa' },
     { id: 3, name: 'Congresos, conferencias y charlas' },
     { id: 4, name: 'Conciertos' }
   ];
+
   eventForm = new FormGroup({
     eventType: new FormControl(),
     startDate: new FormControl(),
@@ -30,6 +35,8 @@ export class NuevoEventoComponent {
     guestsNumber: new FormControl(),
     photographer: new FormControl()
   });
+
+  spacesByType: Space[] = [];
 
   onEventForm(): void {
     const formValue = this.eventForm.value;
@@ -48,5 +55,15 @@ export class NuevoEventoComponent {
     };
 
     console.log(form);
+
+    const sectionElement = document.getElementById('sectionForm');
+    if (sectionElement) {
+      sectionElement.style.display = 'none';
+    }
+
+    this.spaceService.findByEventType(form.eventType).subscribe(spaces => {
+      this.spacesByType = spaces;
+    });
+    
   }
 }

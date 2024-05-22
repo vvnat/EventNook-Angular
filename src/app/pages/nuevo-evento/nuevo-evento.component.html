@@ -1,9 +1,9 @@
 <app-header></app-header>
 <main>
     <h2>Creación del evento</h2>
-    <section class="over-hide z-bigger">
+    <section class="over-hide z-bigger" id="sectionForm">
         <form [formGroup]="eventForm" (submit)="onEventForm()">
-            
+
             <h4>Selecciona el tipo de evento que deseas organizar:</h4>
 
             <input type="radio" class="checkbox-tools" name="eventType" id="0" value="0" formControlName="eventType">
@@ -32,5 +32,9 @@
             <h4></h4>
             <button type="submit">Continuar</button>
         </form>
+    </section>
+
+    <section id="section2" style="display: none;">
+        
     </section>
 </main>
