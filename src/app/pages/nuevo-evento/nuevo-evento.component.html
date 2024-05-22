@@ -2,8 +2,9 @@
 <main>
     <h2>Creación del evento</h2>
     <section class="over-hide z-bigger">
-        <h4>Selecciona el tipo de evento que deseas organizar:</h4>
         <form [formGroup]="eventForm" (submit)="onEventForm()">
+            
+            <h4>Selecciona el tipo de evento que deseas organizar:</h4>
 
             <input type="radio" class="checkbox-tools" name="eventType" id="0" value="0" formControlName="eventType">
             <label for="0" class="for-checkbox-tools">{{eventTypes[0].name}}</label>
