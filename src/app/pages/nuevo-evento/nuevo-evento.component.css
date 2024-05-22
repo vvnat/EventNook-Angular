@@ -61,7 +61,7 @@ form{
 .checkbox-tools:not(:checked) + label{
 	position: relative;
 	padding: 20px;
-	width: 110px;
+	width: 200px;
 	font-size: 14px;
     margin: 10px;
     display: flex;
@@ -77,14 +77,14 @@ form{
 .checkbox-tools:not(:checked) + label{
     min-height: 90px;
 	background-color: var(--yellow-1);
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
 }
 .checkbox-tools:checked + label{
 	background-color: transparent;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
 }
 .checkbox-tools:not(:checked) + label:hover{
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 12px rgba(36, 14, 63, 0.2);
 }
 .checkbox-tools:checked + label::before,
 .checkbox-tools:not(:checked) + label::before{
@@ -109,19 +109,42 @@ form{
 .checkbox:checked ~ .section .container .row .col-12 .checkbox-tools:not(:checked) + label{
 	background-color: var(--light-green);
 	color: var(--green-1);
-	box-shadow: 0 1x 4px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
+}
+
+input[type="date"]{
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--light-gray);
+    font-family: Lexend, sans-serif;
+}
+
+input[type="number"]{
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--light-gray);
+    font-family: Lexend, sans-serif;
 }
 
 @media (max-width: 768px){
     main{
         width: 100%;
-        margin-top: 0;
     }
     form{
         width: 100%;
     }
     .checkbox-tools:checked + label,
     .checkbox-tools:not(:checked) + label{
+        width: 100%;
+    }
+    input[type="date"]{
+        width: 100%;
+    }
+    input[type="number"]{
         width: 100%;
     }
 }
