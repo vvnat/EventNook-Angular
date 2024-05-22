@@ -3,6 +3,7 @@ export type Restaurant = {
     name: string;
     image: string;
     description: string;
+    menu: string;
     capacity: number;
     price: number;
     contactNumber: string;

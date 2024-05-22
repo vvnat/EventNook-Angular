@@ -8,6 +8,8 @@
                   <img [src]="restaurant.image" [alt]="restaurant.name">
                   <div>
                     <p>{{ restaurant.description }}</p>
+                    <p>Destacados de la carta: </p>
+                    <p>{{restaurant.menu}}</p>
                     <p>Aforo: {{ restaurant.capacity }} personas</p>
                     <p>{{ restaurant.price }} €/persona</p>
                     <p>Dirección: {{restaurant.address}}</p>
