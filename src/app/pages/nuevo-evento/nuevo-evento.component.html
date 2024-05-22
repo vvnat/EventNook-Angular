@@ -1,16 +1,29 @@
 <app-header></app-header>
 <main>
     <h2>Creación del evento</h2>
-    <h4>Selecciona el tipo de evento que deseas organizar:</h4>
-    <form [formGroup]="eventTypeForm" (submit)="onEventType()" class="eventTypeForm">
-        @for (eventType of eventTypes; track eventType.id) {
-            <div>
-                <input type="radio" id="{{eventType.id}}" name="eventType" value="{{eventType.name}}" formControlName="eventType">
-                <label for="{{eventType.id}}">{{eventType.name}}</label>
-            </div>
-        }
-        <div class="btn-wrapper">
-            <button class="btn-primary">Siguiente</button>
-        </div>
-    </form>
+    <section class="over-hide z-bigger">
+        <h4>Selecciona el tipo de evento que deseas organizar:</h4>
+        <form [formGroup]="eventTypeForm" (submit)="onEventType()">
+           <!-- @for (eventType of eventTypes; track eventType.id) {
+                <label for="" class="for-checkbox-tools">
+                    <input 
+                    class="checkbox-tools"
+                    type="radio"
+                    name="eventType"
+                    [value]="eventType.name"
+                />
+                {{eventType.name}}
+                </label>
+            }
+            -->
+            <input type="radio" class="checkbox-tools" name="tipoEvento" id="0">
+            <label for="0" class="for-checkbox-tools">{{eventTypes[0].name}}</label>
+            <input type="radio" class="checkbox-tools" name="tipoEvento" id="1">
+            <label for="1" class="for-checkbox-tools">{{eventTypes[1].name}}</label>
+            <input type="radio" class="checkbox-tools" name="tipoEvento" id="2">
+            <label for="2" class="for-checkbox-tools">{{eventTypes[2].name}}</label>
+            <input type="radio" class="checkbox-tools" name="tipoEvento" id="3">
+            <label for="3" class="for-checkbox-tools">{{eventTypes[3].name}}</label>
+        </form>
+    </section>
 </main>

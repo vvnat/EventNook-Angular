@@ -36,7 +36,7 @@ a:first-of-type {
 
 a:not(:first-of-type) {
     text-decoration: none;
-    color: var(--yellow-1);
+    color: var(--custom-whitesmoke);
     font-weight: 600;
     font-size: 18px;
     text-shadow: 0px 4px 4px rgba(65, 64, 17, 0.25);
