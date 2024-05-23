@@ -89,7 +89,8 @@ export class NuevoEventoComponent {
   spaceSelected(spaceId:number): void {
     this.form.spaceId = spaceId;
     console.log(this.form);
-    timer(200);
+    //aquí meteré alguna animación para transicionar a la siguiente sección
+    
     const sectionElement2 = document.getElementById('section2');
     if (sectionElement2) {
       sectionElement2.style.display = 'none';
