@@ -19,8 +19,12 @@ export class SpaceBookingService {
       return this.http.get<SpaceBooking[]>(`${this.url}/reservasEspacios`);
     }
 
-    findById(spaceId: number): Observable<SpaceBooking> {
+    /*findById(spaceId: number): Observable<SpaceBooking> {
       return this.http.get<SpaceBooking>(`${this.url}/reservasEspacios/${spaceId}`);
+    }*/
+
+    findByDateRange(startDate: string, endDate: string): Observable<SpaceBooking[]> {
+        return this.http.get<SpaceBooking[]>(`${this.url}/reservasEspacios/${startDate}/${endDate}`);
     }
 
 }

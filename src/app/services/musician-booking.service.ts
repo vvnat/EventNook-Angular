@@ -19,8 +19,12 @@ export class MusicianBookingService {
       return this.http.get<MusicianBooking[]>(`${this.url}/reservasMusicos`);
     }
 
-    findById(musicianId: number): Observable<MusicianBooking> {
+   /* findById(musicianId: number): Observable<MusicianBooking> {
       return this.http.get<MusicianBooking>(`${this.url}/reservasMusicos/${musicianId}`);
+    }*/
+
+    findByDateRange(startDate: string, endDate: string): Observable<MusicianBooking[]> {
+        return this.http.get<MusicianBooking[]>(`${this.url}/reservasMusicos/${startDate}/${endDate}`);
     }
 
 }

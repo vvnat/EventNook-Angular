@@ -4,8 +4,8 @@ import { EventForm } from '../../types/EventForm';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Space } from '../../types/Space';
 import { SpaceService } from '../../services/space.service';
-import { waitForAsync } from '@angular/core/testing';
-import { timer } from 'rxjs';
+import { SpaceBookingService } from '../../services/space-booking.service';
+import { SpaceBooking } from '../../types/SpaceBooking';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { timer } from 'rxjs';
 })
 export class NuevoEventoComponent {
   spaceService: SpaceService = inject(SpaceService);
+  spaceBookingService: SpaceBookingService = inject(SpaceBookingService);
 
   protected eventTypes = [
     { id: 1, name: 'Bodas y comuniones' },
@@ -39,6 +40,7 @@ export class NuevoEventoComponent {
   });
 
   spacesByTypeAndCapacity: Space[] = [];
+  spacesFiltered: Space[] = [];
 
     form: EventForm = {
     eventType: 0,
@@ -90,7 +92,7 @@ export class NuevoEventoComponent {
     this.form.spaceId = spaceId;
     console.log(this.form);
     //aquí meteré alguna animación para transicionar a la siguiente sección
-    
+
     const sectionElement2 = document.getElementById('section2');
     if (sectionElement2) {
       sectionElement2.style.display = 'none';
