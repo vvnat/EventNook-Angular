@@ -36,7 +36,7 @@ export class NuevoEventoComponent {
     photographer: new FormControl()
   });
 
-  spacesByType: Space[] = [];
+  spacesByTypeAndCapacity: Space[] = [];
 
   onEventForm(): void {
     const formValue = this.eventForm.value;
@@ -61,8 +61,8 @@ export class NuevoEventoComponent {
       sectionElement.style.display = 'none';
     }
 
-    this.spaceService.findByEventType(form.eventType).subscribe(spaces => {
-      this.spacesByType = spaces;
+    this.spaceService.findByEventTypeAndCapacity(form.eventType, form.guestsNumber).subscribe(spaces => {
+      this.spacesByTypeAndCapacity = spaces;
     });
     
   }

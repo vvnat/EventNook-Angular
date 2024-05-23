@@ -29,4 +29,8 @@ export class SpaceService {
     findByCapacity(capacity: number): Observable<Space[]> {
         return this.http.get<Space[]>(`${this.url}/spacesByCapacity/${capacity}`);
     }
+
+    findByEventTypeAndCapacity(eventType: number, capacity: number): Observable<Space[]> {
+        return this.http.get<Space[]>(`${this.url}/spacesFiltered/${eventType}/${capacity}`);
+    }
 }
