@@ -4,6 +4,8 @@ import { EventForm } from '../../types/EventForm';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Space } from '../../types/Space';
 import { SpaceService } from '../../services/space.service';
+import { waitForAsync } from '@angular/core/testing';
+import { timer } from 'rxjs';
 
 
 @Component({
@@ -38,10 +40,23 @@ export class NuevoEventoComponent {
 
   spacesByTypeAndCapacity: Space[] = [];
 
+    form: EventForm = {
+    eventType: 0,
+    startDate: new Date(),
+    endDate: new Date(),
+    spaceId: null,
+    restaurantId: null,
+    cateringId: null,
+    musicianId: null,
+    open_bar: false,
+    guestsNumber: 0,
+    photographer: false
+  }
+
   onEventForm(): void {
     const formValue = this.eventForm.value;
 
-    const form: EventForm = {
+      this.form = {
       eventType: formValue.eventType,
       startDate: formValue.startDate,
       endDate: formValue.endDate,
@@ -54,9 +69,9 @@ export class NuevoEventoComponent {
       photographer: false
     };
 
-    console.log(form);
+    console.log(this.form);
 
-    this.spaceService.findByEventTypeAndCapacity(form.eventType, form.guestsNumber).subscribe(spaces => {
+    this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
       this.spacesByTypeAndCapacity = spaces;
     });
 
@@ -71,17 +86,14 @@ export class NuevoEventoComponent {
     }
   }
 
-  onSpace(): void {
-    const space = document.querySelector('.space');
-    const seleccionarButton = document.querySelector('.displayNone');
-
-    if (seleccionarButton){
-      seleccionarButton.classList.remove('displayNone');
-      seleccionarButton.classList.add('seleccionarButton');
-    }
-  }
-
   spaceSelected(spaceId:number): void {
-    console.log(spaceId);
+    this.form.spaceId = spaceId;
+    console.log(this.form);
+    timer(200);
+    const sectionElement2 = document.getElementById('section2');
+    if (sectionElement2) {
+      sectionElement2.style.display = 'none';
+    }
+
   }
 }

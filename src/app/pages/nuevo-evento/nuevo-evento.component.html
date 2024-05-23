@@ -37,7 +37,7 @@
     <section id="section2" style="display: none;" id="section2">
         <p>Selecciona el espacio para tu evento</p>
         @for (space of spacesByTypeAndCapacity; track space.id) {
-            <article class="space" (click)="onSpace()">
+            <article class="space">
                 <h3>{{ space.name }}</h3>
                   <img [src]="space.image" [alt]="space.name">
                   <div>
@@ -47,7 +47,7 @@
                     <p>Dirección: {{space.address}}</p>
                     <p>Contacto: {{space.contactNumber}}</p>
                   </div>
-                  <button (click)="spaceSelected(space.id)" class="displayNone">Seleccionar</button>
+                  <button (click)="spaceSelected(space.id)" class="seleccionarButton">Seleccionar</button>
             </article>
         }
     </section>
