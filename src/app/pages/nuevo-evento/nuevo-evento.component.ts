@@ -40,7 +40,7 @@ export class NuevoEventoComponent {
   });
 
   spacesByTypeAndCapacity: Space[] = [];
-  spacesFiltered: Space[] = [];
+  reservasByDateRange: SpaceBooking[] = [];
 
     form: EventForm = {
     eventType: 0,
@@ -72,6 +72,10 @@ export class NuevoEventoComponent {
     };
 
     console.log(this.form);
+
+    this.spaceBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
+      this.reservasByDateRange = reservas;
+    });
 
     this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
       this.spacesByTypeAndCapacity = spaces;

@@ -23,7 +23,7 @@ export class MusicianBookingService {
       return this.http.get<MusicianBooking>(`${this.url}/reservasMusicos/${musicianId}`);
     }*/
 
-    findByDateRange(startDate: string, endDate: string): Observable<MusicianBooking[]> {
+    findByDateRange(startDate: Date, endDate: Date): Observable<MusicianBooking[]> {
         return this.http.get<MusicianBooking[]>(`${this.url}/reservasMusicos/${startDate}/${endDate}`);
     }
 

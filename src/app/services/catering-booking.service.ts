@@ -23,7 +23,7 @@ export class CateringBookingService {
       return this.http.get<CateringBooking>(`${this.url}/reservasCaterings/${cateringId}`);
     }*/
 
-    findByDateRange(startDate: string, endDate: string): Observable<CateringBooking[]> {
+    findByDateRange(startDate: Date, endDate: Date): Observable<CateringBooking[]> {
         return this.http.get<CateringBooking[]>(`${this.url}/reservasCaterings/${startDate}/${endDate}`);
     }
 
