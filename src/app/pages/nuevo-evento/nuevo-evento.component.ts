@@ -56,14 +56,30 @@ export class NuevoEventoComponent {
 
     console.log(form);
 
+    this.spaceService.findByEventTypeAndCapacity(form.eventType, form.guestsNumber).subscribe(spaces => {
+      this.spacesByTypeAndCapacity = spaces;
+    });
+
     const sectionElement = document.getElementById('sectionForm');
     if (sectionElement) {
       sectionElement.style.display = 'none';
     }
 
-    this.spaceService.findByEventTypeAndCapacity(form.eventType, form.guestsNumber).subscribe(spaces => {
-      this.spacesByTypeAndCapacity = spaces;
-    });
-    
+    const sectionElement2 = document.getElementById('section2');
+    if (sectionElement2) {
+      sectionElement2.style.display = 'block';
+    }
+  }
+
+  onSpace(): void {
+    const seleccionarButton = document.getElementById('seleccionarButton');
+
+    if (seleccionarButton){
+      seleccionarButton.classList.add('seleccionarButton');
+    }
+  }
+
+  spaceSelected(spaceId:number): void {
+    console.log(spaceId);
   }
 }

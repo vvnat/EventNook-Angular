@@ -34,7 +34,21 @@
         </form>
     </section>
 
-    <section id="section2" style="display: none;">
-        
+    <section id="section2" style="display: none;" id="section2">
+        <p>Selecciona el espacio para tu evento</p>
+        @for (space of spacesByTypeAndCapacity; track space.id) {
+            <article class="space" (click)="onSpace()">
+                <h3>{{ space.name }}</h3>
+                  <img [src]="space.image" [alt]="space.name">
+                  <div>
+                    <p>{{ space.description }}</p>
+                    <p>Aforo: {{ space.capacity }} personas</p>
+                    <p>{{ space.price }} €/día</p>
+                    <p>Dirección: {{space.address}}</p>
+                    <p>Contacto: {{space.contactNumber}}</p>
+                  </div>
+                  <button style="display: none;" id="seleccionarButton" (click)="spaceSelected(space.id)">Seleccionar</button>
+            </article>
+        }
     </section>
 </main>
