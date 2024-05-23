@@ -30,9 +30,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Tareas pendientes
 
 1- Rellenar la base de datos con las direcciones de los restaurantes y espacios
+
 2- Filtrar los espacios y restaurantes según las reservas y la fechas seleccionadas
+
 3- Añadir animación de transición al elegir el espacio/restaurante
+
 4- Terminar el formulario de creación
+
 5- Desplegable de explorar en el header
 
 Adicional:
