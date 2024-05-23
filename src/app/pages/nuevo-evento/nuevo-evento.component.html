@@ -47,7 +47,7 @@
                     <p>Dirección: {{space.address}}</p>
                     <p>Contacto: {{space.contactNumber}}</p>
                   </div>
-                  <button style="display: none;" id="seleccionarButton" (click)="spaceSelected(space.id)">Seleccionar</button>
+                  <button (click)="spaceSelected(space.id)" class="displayNone">Seleccionar</button>
             </article>
         }
     </section>

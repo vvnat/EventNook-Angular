@@ -72,9 +72,11 @@ export class NuevoEventoComponent {
   }
 
   onSpace(): void {
-    const seleccionarButton = document.getElementById('seleccionarButton');
+    const space = document.querySelector('.space');
+    const seleccionarButton = document.querySelector('.displayNone');
 
     if (seleccionarButton){
+      seleccionarButton.classList.remove('displayNone');
       seleccionarButton.classList.add('seleccionarButton');
     }
   }
