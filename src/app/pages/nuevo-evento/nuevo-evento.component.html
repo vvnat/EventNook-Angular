@@ -36,8 +36,8 @@
 
     <section id="section2" style="display: none;" id="section2">
         <p>Selecciona el espacio para tu evento</p>
-        @for (space of spacesByTypeAndCapacity; track space.id) {
-            @for (spaceBooking of reservasByDateRange; track spaceBooking.id) {
+        @for (spaceBooking of reservasByDateRange; track spaceBooking.id) {
+            @for (space of spacesByTypeAndCapacity; track space.id) {
                 @if (spaceBooking.spaceId!=space.id) {
                     <article class="space">
                         <h3>{{ space.name }}</h3>
