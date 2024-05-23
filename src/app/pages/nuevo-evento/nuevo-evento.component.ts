@@ -70,6 +70,7 @@ export class NuevoEventoComponent {
       open_bar: false,
       photographer: false
     };
+    
 
     console.log(this.form);
 

@@ -36,9 +36,9 @@
 
     <section id="section2" style="display: none;" id="section2">
         <p>Selecciona el espacio para tu evento</p>
-       <!-- @for (spaceBooking of reservasByDateRange; track spaceBooking.id) {-->
+        @for (spaceBooking of reservasByDateRange; track spaceBooking.id) {
             @for (space of spacesByTypeAndCapacity; track space.id) {
-                <!--@if (spaceBooking.spaceId!=space.id) {-->
+                @if (spaceBooking.spaceId==space.id) {
                     <article class="space">
                         <h3>{{ space.name }}</h3>
                           <img [src]="space.image" [alt]="space.name">
@@ -52,7 +52,7 @@
                           <button (click)="spaceSelected(space.id)" class="seleccionarButton">Seleccionar</button>
                     </article>
                 }
-           <!-- }-->    
-       <!-- }-->
+            }  
+        }
     </section>
 </main>
