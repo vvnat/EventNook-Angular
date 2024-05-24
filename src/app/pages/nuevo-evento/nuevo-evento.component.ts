@@ -6,16 +6,22 @@ import { Space } from '../../types/Space';
 import { SpaceService } from '../../services/space.service';
 import { SpaceBookingService } from '../../services/space-booking.service';
 import { SpaceBooking } from '../../types/SpaceBooking';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule],
+  imports: [HeaderComponent, ReactiveFormsModule, BrowserModule, BrowserAnimationsModule, FormsModule, CalendarModule],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent {
+
+  datetime24h: Date[] | undefined;
+
   spaceService: SpaceService = inject(SpaceService);
   spaceBookingService: SpaceBookingService = inject(SpaceBookingService);
 

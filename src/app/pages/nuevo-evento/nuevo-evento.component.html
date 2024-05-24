@@ -26,6 +26,9 @@
                 <input type="datetime-local" required formControlName="endDate">
             </div>
 
+            <p-calendar inputId="calendar-24h" [(ngModel)]="datetime24h" [showTime]="true" formControlName="inputFecha"/>
+
+
             <h4>Selecciona el número de invitados: </h4>
             <input type="number" required formControlName="guestsNumber">
             
@@ -36,7 +39,7 @@
 
     <section id="section2" style="display: none;" id="section2">
         <p>Selecciona el espacio para tu evento</p>
-        @for (spaceBooking of reservasByDateRange; track spaceBooking.id) {
+        @for (spaceBooking of reservasByDateRange; track spaceBooking.spaceId) {
             @for (space of spacesByTypeAndCapacity; track space.id) {
                 @if (spaceBooking.spaceId!=space.id) {
                     <article class="space">
