@@ -55,7 +55,7 @@
     </section>
 
     <section id="section2" style="display: none;" id="section2">
-        <p>Selecciona el espacio para tu evento</p>
+        <p>Espacios disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
             @for (space of spacesByTypeAndCapacity; track space.id) {
                 <article class="space">
                     <h3>{{ space.name }}</h3>

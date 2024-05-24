@@ -8,11 +8,12 @@ import { SpaceBookingService } from '../../services/space-booking.service';
 import { SpaceBooking } from '../../types/SpaceBooking';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule],
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
@@ -83,13 +84,19 @@ export class NuevoEventoComponent {
 
     this.spaceBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
       this.reservasByDateRange = reservas;
+
+      this.reservedSpacesId = this.reservasByDateRange.map(reserva => reserva.spaceId);
+      console.log("Espacios reservados en ese rango: "+this.reservedSpacesId);
+
+      this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
+        this.spacesByTypeAndCapacity = spaces.filter(space => !this.reservedSpacesId.includes(space.id));
+        console.log("Espacios disponibles quitando los reservados: "+this.spacesByTypeAndCapacity);
+      });
+
     });
 
-    this.reservedSpacesId = this.reservasByDateRange.map(reserva => reserva.spaceId);
+   
 
-    this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
-      this.spacesByTypeAndCapacity = spaces.filter(space => !this.reservedSpacesId.includes(space.id));
-    });
 
     const sectionElement = document.getElementById('sectionForm');
     if (sectionElement) {
