@@ -31,14 +31,16 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 1- Rellenar la base de datos con las direcciones de los restaurantes y espacios
 
-2- Filtrar los espacios y restaurantes según las reservas y la fechas seleccionadas
+2- Filtrar los espacios y restaurantes según las reservas y la fechas seleccionadas -> Espacios hechos
 
 3- Añadir animación de transición al elegir el espacio/restaurante
 
-4- Terminar el formulario de creación
+4- Terminar el formulario de creación -> Comprobar tipo de evento y dependiendo dar a elegir espacio o restaurante
 
-5- Desplegable de explorar en el header
+5- Añadir un footer simple con información
 
 Adicional:
 
 - Edición de perfil de usuarios
+- Desplegable de explorar en el header con prime
+- Cambiar inputs del login y registro por los de primeng (más bonitos)
