@@ -6,21 +6,21 @@ import { Space } from '../../types/Space';
 import { SpaceService } from '../../services/space.service';
 import { SpaceBookingService } from '../../services/space-booking.service';
 import { SpaceBooking } from '../../types/SpaceBooking';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, BrowserModule, BrowserAnimationsModule, FormsModule, CalendarModule],
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent {
 
   datetime24h: Date[] | undefined;
+
+  fechaInicio: Date[] | undefined;
 
   spaceService: SpaceService = inject(SpaceService);
   spaceBookingService: SpaceBookingService = inject(SpaceBookingService);
@@ -42,11 +42,12 @@ export class NuevoEventoComponent {
     musicianId: new FormControl(),
     open_bar: new FormControl(),
     guestsNumber: new FormControl(),
-    photographer: new FormControl()
+    photographer: new FormControl(),
   });
 
   spacesByTypeAndCapacity: Space[] = [];
   reservasByDateRange: SpaceBooking[] = [];
+  reservedSpacesId: number[] = [];
 
     form: EventForm = {
     eventType: 0,
@@ -84,8 +85,10 @@ export class NuevoEventoComponent {
       this.reservasByDateRange = reservas;
     });
 
+    this.reservedSpacesId = this.reservasByDateRange.map(reserva => reserva.spaceId);
+
     this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
-      this.spacesByTypeAndCapacity = spaces;
+      this.spacesByTypeAndCapacity = spaces.filter(space => !this.reservedSpacesId.includes(space.id));
     });
 
     const sectionElement = document.getElementById('sectionForm');

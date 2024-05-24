@@ -21,12 +21,29 @@
             <div class="fechas">
                 <h4>Fecha de inicio: </h4>
                 <h4>Fecha de fin: </h4>
+              <!--  
+                <p-calendar inputId="fechaInicio" 
+                [(ngModel)]="fechaInicio" 
+                [showTime]="true" 
+                required 
+                formControlName="startDate" 
+                [iconDisplay]="'input'" 
+                [showIcon]="true" />
+                <p-calendar inputId="fechaFin" 
+                [(ngModel)]="datetime24h" 
+                [showTime]="true"
+                required 
+                formControlName="endDate"     
+                [iconDisplay]="'input'" 
+                [showIcon]="true" />
+                         -->
+            <input type="datetime-local" required formControlName="startDate">
+            <input type="datetime-local" required formControlName="endDate">
 
-                <input type="datetime-local" required formControlName="startDate">
-                <input type="datetime-local" required formControlName="endDate">
             </div>
+   
 
-            <p-calendar inputId="calendar-24h" [(ngModel)]="datetime24h" [showTime]="true" formControlName="inputFecha"/>
+            
 
 
             <h4>Selecciona el número de invitados: </h4>
@@ -39,23 +56,19 @@
 
     <section id="section2" style="display: none;" id="section2">
         <p>Selecciona el espacio para tu evento</p>
-        @for (spaceBooking of reservasByDateRange; track spaceBooking.spaceId) {
             @for (space of spacesByTypeAndCapacity; track space.id) {
-                @if (spaceBooking.spaceId!=space.id) {
-                    <article class="space">
-                        <h3>{{ space.name }}</h3>
-                          <img [src]="space.image" [alt]="space.name">
-                          <div>
-                            <p>{{ space.description }}</p>
-                            <p>Aforo: {{ space.capacity }} personas</p>
-                            <p>{{ space.price }} €/día</p>
-                            <p>Dirección: {{space.address}}</p>
-                            <p>Contacto: {{space.contactNumber}}</p>
-                          </div>
-                          <button (click)="spaceSelected(space.id)" class="seleccionarButton">Seleccionar</button>
-                    </article>
-                }
-            }  
-        }
+                <article class="space">
+                    <h3>{{ space.name }}</h3>
+                        <img [src]="space.image" [alt]="space.name">
+                        <div>
+                        <p>{{ space.description }}</p>
+                        <p>Aforo: {{ space.capacity }} personas</p>
+                        <p>{{ space.price }} €/día</p>
+                        <p>Dirección: {{space.address}}</p>
+                        <p>Contacto: {{space.contactNumber}}</p>
+                        </div>
+                        <button (click)="spaceSelected(space.id)" class="seleccionarButton">Seleccionar</button>
+                </article>
+            }
     </section>
 </main>

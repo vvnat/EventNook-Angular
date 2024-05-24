@@ -134,11 +134,10 @@ form{
     box-shadow: 0px 8px 12px rgba(148.23004603385925, 64.33935597538948, 255, 0.20000000298023224);
 }
 
-input[type="datetime-local"]{
+p-calendar{
     width: 40%;
-    padding: 10px;
+    height: 30px;
     margin: 10px;
-    border-radius: 4px;
     border: 1px solid var(--light-gray);
     font-family: Lexend, sans-serif;
 }
