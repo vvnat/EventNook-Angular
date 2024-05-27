@@ -9,6 +9,16 @@ import { SpaceBooking } from '../../types/SpaceBooking';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { DatePipe } from '@angular/common';
+import { Catering } from '../../types/Catering';
+import { CateringService } from '../../services/catering.service';
+import { CateringBooking } from '../../types/CateringBooking';
+import { CateringBookingService } from '../../services/catering-booking.service';
+import { Musician } from '../../types/Musician';
+import { MusicianService } from '../../services/musician.service';
+import { MusicianBooking } from '../../types/MusicianBooking';
+import { MusicianBookingService } from '../../services/musician-booking.service';
+import { EventService } from '../../services/event.service';
+import { Event } from '../../types/Event';
 
 @Component({
   selector: 'app-nuevo-evento',
@@ -25,6 +35,14 @@ export class NuevoEventoComponent {
 
   spaceService: SpaceService = inject(SpaceService);
   spaceBookingService: SpaceBookingService = inject(SpaceBookingService);
+
+  cateringBookingService: CateringBookingService = inject(CateringBookingService);
+  cateringService: CateringService = inject(CateringService);
+
+  musicianService: MusicianService = inject(MusicianService);
+  musicianBookingService: MusicianBookingService = inject(MusicianBookingService);
+
+  eventService: EventService = inject(EventService);
 
   protected eventTypes = [
     { id: 1, name: 'Bodas y comuniones' },
@@ -46,9 +64,20 @@ export class NuevoEventoComponent {
     photographer: new FormControl(),
   });
 
+  //spaces
   spacesByTypeAndCapacity: Space[] = [];
   reservasByDateRange: SpaceBooking[] = [];
   reservedSpacesId: number[] = [];
+
+  //caterings
+  reservasCateringsByDateRange: CateringBooking[] = [];
+  caterings: Catering[] = [];
+  reservedCaterings: number[] = [];
+
+  //musicians
+  musicians: Musician[] = [];
+  reservasMusiciansByDateRange: MusicianBooking[] = [];
+  reservedMusicians: number[] = [];
 
     form: EventForm = {
     eventType: 0,
@@ -62,6 +91,7 @@ export class NuevoEventoComponent {
     guestsNumber: 0,
     photographer: false
   }
+  precioTotal: number = 0;
 
   onEventForm(): void {
     const formValue = this.eventForm.value;
@@ -82,22 +112,19 @@ export class NuevoEventoComponent {
 
     console.log(this.form);
 
+    //recuperando espacios por rango de fecha, tipo de evento y aforo
     this.spaceBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
       this.reservasByDateRange = reservas;
 
       this.reservedSpacesId = this.reservasByDateRange.map(reserva => reserva.spaceId);
-      console.log("Espacios reservados en ese rango: "+this.reservedSpacesId);
 
       this.spaceService.findByEventTypeAndCapacity(this.form.eventType, this.form.guestsNumber).subscribe(spaces => {
         this.spacesByTypeAndCapacity = spaces.filter(space => !this.reservedSpacesId.includes(space.id));
-        console.log("Espacios disponibles quitando los reservados: "+this.spacesByTypeAndCapacity);
       });
 
     });
 
-   
-
-
+    //cambiando visibilidad de las secciones
     const sectionElement = document.getElementById('sectionForm');
     if (sectionElement) {
       sectionElement.style.display = 'none';
@@ -112,12 +139,145 @@ export class NuevoEventoComponent {
   spaceSelected(spaceId:number): void {
     this.form.spaceId = spaceId;
     console.log(this.form);
-    //aquí meteré alguna animación para transicionar a la siguiente sección
-
+   
+    //visibilidad section
     const sectionElement2 = document.getElementById('section2');
     if (sectionElement2) {
       sectionElement2.style.display = 'none';
     }
 
+     //recuperando caterings
+     this.cateringBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(caterings => {
+      this.reservasCateringsByDateRange = caterings;
+
+      this.reservedCaterings = this.reservasCateringsByDateRange.map(reserva => reserva.cateringId);
+
+      this.cateringService.findByEventType(this.form.eventType).subscribe(caterings => {
+        this.caterings = caterings.filter(catering => !this.reservedCaterings.includes(catering.id));
+      });
+      
+    });
+
+    //visibilidad section
+    const sectionElement3 = document.getElementById('section3');
+    if (sectionElement3) {
+      sectionElement3.style.display = 'block';
+    }
   }
+
+  cateringSelected(cateringId: number): void {
+    this.form.cateringId = cateringId;
+    console.log(this.form);
+
+    //visibilidad section
+    const sectionElement3 = document.getElementById('section3');
+    if (sectionElement3) {
+      sectionElement3.style.display = 'none';
+    }
+
+    //recupero músicos
+     this.musicianBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(musicians => {
+      this.reservasMusiciansByDateRange = musicians;
+
+      this.reservedMusicians = this.reservasMusiciansByDateRange.map(reserva => reserva.musicianId);
+
+      this.musicianService.findByEventType(this.form.eventType).subscribe(musicians => {
+        this.musicians = musicians.filter(musicians => !this.reservedMusicians.includes(musicians.id));
+      });
+      
+    });
+
+    //visibilidad section
+    const sectionElement4 = document.getElementById('section4');
+    if (sectionElement4) {
+      sectionElement4.style.display = 'block';
+    }
+  }
+
+  musicianSelected(musicianId: number): void {
+    this.form.musicianId = musicianId;
+    console.log(this.form);
+
+    //visibilidad section
+    const sectionElement4 = document.getElementById('section4');
+    if (sectionElement4) {
+      sectionElement4.style.display = 'none';
+    }
+
+    //visibilidad section
+    const sectionElement5 = document.getElementById('section5');
+    if (sectionElement5) {
+      sectionElement5.style.display = 'block';
+    }
+  }
+
+  onExtraServices(): void {
+    this.form.open_bar = this.eventForm.value.open_bar;
+    this.form.photographer = this.eventForm.value.photographer;
+
+    console.log(this.form);
+
+    const sectionElement5 = document.getElementById('section5');
+    if (sectionElement5) {
+      sectionElement5.style.display = 'none';
+    }
+
+    const sectionElement6 = document.getElementById('resumen');
+    if (sectionElement6) {
+      sectionElement6.style.display = 'block';
+    }
+
+
+    //calcular precio total
+    this.spaceService.findById(this.form.spaceId || 0).subscribe(space => {
+      this.precioTotal += space.price;
+    });
+
+    this.cateringService.findById(this.form.cateringId || 0).subscribe(catering => {
+      this.precioTotal += catering.price;
+    });
+
+    this.musicianService.findById(this.form.musicianId || 0).subscribe(musician => {
+      this.precioTotal += musician.price;
+    });
+
+    if (this.form.open_bar) {
+      this.precioTotal += this.form.guestsNumber * 5;
+    }
+
+    if (this.form.photographer) {
+      this.precioTotal += 800;
+    }
+
+    const selectedSpace = this.spacesByTypeAndCapacity.find(space => space.id === this.form.spaceId);
+
+    const selectedCatering = this.caterings.find(catering => catering.id === this.form.cateringId);
+
+    const selectedMusician = this.musicians.find(musician => musician.id === this.form.musicianId);
+
+  }
+
+  onSave(): void {
+    const evento: Event = {
+      //esto es increiblemente erroneo, el id del usuario deberia ser el del usuario logueado y el id del evento deberia ser autoincremental
+      id: 1002,
+      eventType: this.form.eventType,
+      startDate: this.form.startDate,
+      endDate: this.form.endDate,
+      spaceId: this.form.spaceId,
+      restaurantId: this.form.restaurantId,
+      cateringId: this.form.cateringId,
+      musicianId: this.form.musicianId,
+      open_bar: this.form.open_bar,
+      guestsNumber: this.form.guestsNumber,
+      photographer: this.form.photographer,
+      creatorId: 2
+    };
+
+    this.eventService.create(evento).subscribe(event => {
+      console.log(event);
+      
+    });
+  }
+  
 }

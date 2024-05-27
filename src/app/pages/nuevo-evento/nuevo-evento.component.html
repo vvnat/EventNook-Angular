@@ -21,30 +21,10 @@
             <div class="fechas">
                 <h4>Fecha de inicio: </h4>
                 <h4>Fecha de fin: </h4>
-              <!--  
-                <p-calendar inputId="fechaInicio" 
-                [(ngModel)]="fechaInicio" 
-                [showTime]="true" 
-                required 
-                formControlName="startDate" 
-                [iconDisplay]="'input'" 
-                [showIcon]="true" />
-                <p-calendar inputId="fechaFin" 
-                [(ngModel)]="datetime24h" 
-                [showTime]="true"
-                required 
-                formControlName="endDate"     
-                [iconDisplay]="'input'" 
-                [showIcon]="true" />
-                         -->
             <input type="datetime-local" required formControlName="startDate">
             <input type="datetime-local" required formControlName="endDate">
 
             </div>
-   
-
-            
-
 
             <h4>Selecciona el número de invitados: </h4>
             <input type="number" required formControlName="guestsNumber">
@@ -54,7 +34,7 @@
         </form>
     </section>
 
-    <section id="section2" style="display: none;" id="section2">
+    <section id="section2" style="display: none;">
         <p>Espacios disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
             @for (space of spacesByTypeAndCapacity; track space.id) {
                 <article class="space">
@@ -70,5 +50,85 @@
                         <button (click)="spaceSelected(space.id)" class="seleccionarButton">Seleccionar</button>
                 </article>
             }
+    </section>
+
+    <section id="section3" style="display: none;">
+        <p>Caterings disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
+        <div>
+            <h4>Seguir sin servicio de catering</h4>
+            <img src="../../../assets/icons/icono-flecha.png" alt="seguir">
+        </div>
+        @for (catering of caterings; track catering.id) {
+            <article class="catering">
+                <h3>{{ catering.name }}</h3>
+                    <div>
+                    <p>{{ catering.description }}</p>
+                    <p>{{ catering.price }} €/persona</p>
+                    <p>Contacto: {{catering.contactNumber}}</p>
+                    </div>
+                    <button (click)="cateringSelected(catering.id)" class="seleccionarButton">Seleccionar</button>
+            </article>
+        }
+    </section>
+
+    <section id="section4" style="display: none;">
+        <p>Músicos disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
+        <div>
+            <h4>Seguir sin servicio de música</h4>
+            <img src="../../../assets/icons/icono-flecha.png" alt="seguir">
+        </div>
+        @for (musician of musicians; track musician.id) {
+            <article class="catering">
+                <h3>{{ musician.name }}</h3>
+                    <div>
+                    <p>{{ musician.description }}</p>
+                    <p>{{ musician.price }} €/día</p>
+                    <p>Contacto: {{musician.contactNumber}}</p>
+                    </div>
+                    <button (click)="musicianSelected(musician.id)" class="seleccionarButton">Seleccionar</button>
+            </article>
+        }
+    </section>
+
+    <section id="section5" style="display: none;">
+        <h4>Servicios extras</h4>
+
+        <form [formGroup]="eventForm" (submit)="onExtraServices()">
+            <input type="checkbox" id="0" value="1" formControlName="open_bar">
+            <label for="0" class="for-checkbox-tools">Barra libre de bebidas (+5€/persona)</label>
+    
+            <input type="checkbox" id="1" value="1" formControlName="photographer">
+            <label for="1" class="for-checkbox-tools">Fotógrafo (+800€)</label>
+        </form>
+
+        <button (click)="onExtraServices()">Finalizar</button>
+    </section>
+
+    <section id="resumen" style="display: none;">
+        <h2>Resumen del evento:</h2>
+        <p>Tipo de evento: {{eventTypes[form.eventType].name}}</p>
+        <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
+        <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>
+        <p>Número de invitados: {{form.guestsNumber}}</p>
+        <p>Espacio seleccionado: {{spaceSelected.name}}</p>
+        <p>Catering seleccionado: {{cateringSelected.name}}</p>
+        <p>Músico seleccionado: {{musicianSelected.name}}</p>
+        <p>Extras seleccionados: </p>
+        <span>Barra libre de bebidas: </span>
+        @if (form.open_bar) {
+            <span>Sí</span>
+        }@else {
+            <span>No</span>
+        }
+        <p> </p>
+        <span>Fotógrafo:</span>
+        @if (form.photographer) {
+            <span>Sí</span>
+        }@else {
+            <span>No</span>
+        }
+        <p>Precio final: {{precioTotal}}€</p>
+
+        <button (click)="onSave()" routerLink="/home">Confirmar</button>
     </section>
 </main>
