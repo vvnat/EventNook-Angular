@@ -1,4 +1,5 @@
 export type EventForm = {
+    creatorId: number;
     eventType: number;
     startDate: Date;
     endDate: Date;

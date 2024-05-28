@@ -19,15 +19,26 @@ import { MusicianBooking } from '../../types/MusicianBooking';
 import { MusicianBookingService } from '../../services/musician-booking.service';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../types/Event';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../types/User';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
   imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe],
+  providers: [CookieService],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent {
+
+  cookieService: CookieService = inject(CookieService);
+  userService: UserService = inject(UserService);
+
+  user: User = JSON.parse(this.cookieService.get('user'));
+
+  userId:number = this.user.id || 0;
 
   datetime24h: Date[] | undefined;
 
@@ -44,6 +55,8 @@ export class NuevoEventoComponent {
 
   eventService: EventService = inject(EventService);
 
+  creatorId = 1;
+
   selectedSpace: string = "";
   selectedCatering: string = "";
   selectedMusician: string = "";
@@ -56,6 +69,7 @@ export class NuevoEventoComponent {
   ];
 
   eventForm = new FormGroup({
+    creatorId: new FormControl(),
     eventType: new FormControl(),
     startDate: new FormControl(),
     endDate: new FormControl(),
@@ -84,6 +98,7 @@ export class NuevoEventoComponent {
   reservedMusicians: number[] = [];
 
     form: EventForm = {
+    creatorId: this.userId,
     eventType: 0,
     startDate: new Date(),
     endDate: new Date(),
@@ -101,6 +116,7 @@ export class NuevoEventoComponent {
     const formValue = this.eventForm.value;
 
       this.form = {
+      creatorId: this.creatorId,
       eventType: formValue.eventType,
       startDate: formValue.startDate,
       endDate: formValue.endDate,
@@ -323,24 +339,7 @@ export class NuevoEventoComponent {
   }
 
   onSave(): void {
-    const evento: Event = {
-      //esto es increiblemente erroneo, el id del usuario deberia ser el del usuario logueado y el id del evento deberia ser autoincremental
-      id: 1002,
-      eventType: this.form.eventType,
-      startDate: this.form.startDate,
-      endDate: this.form.endDate,
-      spaceId: this.form.spaceId,
-      restaurantId: this.form.restaurantId,
-      cateringId: this.form.cateringId,
-      musicianId: this.form.musicianId,
-      open_bar: this.form.open_bar,
-      guestsNumber: this.form.guestsNumber,
-      photographer: this.form.photographer,
-      creatorId: 2
-    };
-
-    this.eventService.create(evento).subscribe(event => {
-      console.log(event);
+    this.eventService.create(this.form).subscribe(event => {
       
     });
   }

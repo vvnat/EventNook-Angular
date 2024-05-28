@@ -3,7 +3,6 @@ import {MatSelect} from '@angular/material/select';
 import { MatFormField } from '@angular/material/select';
 import { MatOption } from '@angular/material/select';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from '../../types/User';
 import { UserService } from '../../services/user.service';
 import { RouterLink } from '@angular/router';
 
