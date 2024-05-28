@@ -43,11 +43,19 @@ section {
 #resumen{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     margin: 0 auto;
     text-align: justify;
     box-shadow: 0px 8px 40px rgba(148.23, 64.339, 255, 0.20);
     border-radius: 10px;
+
+    div{
+        width: 45%;
+        margin: 0 auto;
+    }
+
+    button{
+        margin-left: calc(50% - 50px);
+    }
 }
 
 form{
@@ -126,7 +134,7 @@ form{
 	width: 100%;
 	height: 100%;
 	border-radius: 4px;
-	background-image: linear-gradient(298deg, var(--green-1), var(--green-1));
+	background-image: linear-gradient(298deg, rgba(0, 237, 90, 0.4), var(--primary-color));
 	z-index: -1;
 }
 
@@ -263,6 +271,38 @@ button{
 
     p+div:hover{
         cursor: pointer;
+    }
+}
+
+.extraServices{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+    gap: 10px;
+
+    input[type="checkbox"] {
+        display: none; /* Oculta el checkbox */
+    }
+    
+    label {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    input[type="checkbox"]:checked + label {
+        background-color: var(--dark-green); /* Color de fondo cuando está seleccionado */
+        color: white; /* Color del texto cuando está seleccionado */
+        border-color: var(--dark-green); /* Color del borde cuando está seleccionado */
+    }
+    
+    label:hover {
+        background-color: #f0f0f0;
     }
 }
 

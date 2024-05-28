@@ -108,43 +108,60 @@
     </section>
 
     <section id="section5" style="display: none;">
-        <h4>Servicios extras</h4>
+        <h3>Servicios extras</h3>
+        <p>Recuerda que estos servicios aumentan el importe de tu evento.</p>
+        <p>Para más detalle contacta con la empresa.</p>
 
-        <form [formGroup]="eventForm" (submit)="onExtraServices()">
-            <input type="checkbox" id="0" value="1" formControlName="open_bar">
-            <label for="0" class="for-checkbox-tools">Barra libre de bebidas (+5€/persona)</label>
-    
-            <input type="checkbox" id="1" value="1" formControlName="photographer">
-            <label for="1" class="for-checkbox-tools">Fotógrafo (+800€)</label>
+        <form [formGroup]="eventForm" (submit)="onExtraServices()" class="extraServices">
+            <div>
+                <input type="checkbox" id="open_bar" value="1" formControlName="open_bar">
+                <label for="open_bar">Barra libre de bebidas (+5€/persona)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="photographer" value="1" formControlName="photographer">
+                <label for="photographer">Fotógrafo (+800€)</label>
+            </div>
+            <div>
+                <input type="checkbox" id="seguro" value="1" formControlName="seguro">
+                <label for="seguro">Seguro de cancelación (+20€)</label>
+            </div>
         </form>
 
         <button (click)="onExtraServices()">Finalizar</button>
     </section>
 
     <section id="resumen" style="display: none;">
-        <h2>Resumen</h2>
-        <p>Tipo de evento: {{eventTypes[form.eventType].name}}</p>
-        <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
-        <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>
-        <p>Número de invitados: {{form.guestsNumber}}</p>
-        <p>Espacio seleccionado: {{selectedSpace}}</p>
-        <p>Catering seleccionado: {{selectedCatering}}</p>
-        <p>Músico seleccionado: {{selectedMusician}}</p>
-        <span>Barra libre de bebidas: </span>
-        @if (form.open_bar) {
-            <span>Sí</span>
-        }@else {
-            <span>No</span>
-        }
-        <p> </p>
-        <span>Fotógrafo: </span>
-        @if (form.photographer) {
-            <span>Sí</span>
-        }@else {
-            <span>No</span>
-        }
-        <p>Precio final: {{precioTotal}}€</p>
-
+        <div>
+            <h2>Resumen</h2>
+            <p>Tipo de evento: {{eventTypes[form.eventType].name}}</p>
+            <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
+            <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>
+            <p>Número de invitados: {{form.guestsNumber}}</p>
+            <p>Espacio seleccionado: {{selectedSpace}}</p>
+            <p>Catering seleccionado: {{selectedCatering}}</p>
+            <p>Músico seleccionado: {{selectedMusician}}</p>
+            <span>Barra libre de bebidas: </span>
+            @if (form.open_bar) {
+                <span>Sí</span>
+            }@else {
+                <span>No</span>
+            }
+            <p> </p>
+            <span>Fotógrafo: </span>
+            @if (form.photographer) {
+                <span>Sí</span>
+            }@else {
+                <span>No</span>
+            }
+            <p> </p>
+            <span>Seguro de cancelación: </span>
+            @if (form.seguro) {
+                <span>Sí</span>
+            }@else {
+                <span>No</span>
+            }
+            <p>Precio final: {{precioTotal}}€</p>
+        </div>
         <button (click)="onSave()" routerLink="/home">Confirmar</button>
     </section>
 </main>

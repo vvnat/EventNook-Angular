@@ -91,6 +91,7 @@ export class NuevoEventoComponent implements OnInit{
     open_bar: new FormControl(),
     guestsNumber: new FormControl(),
     photographer: new FormControl(),
+    seguro: new FormControl()
   });
 
   //spaces
@@ -124,7 +125,8 @@ export class NuevoEventoComponent implements OnInit{
     musicianId: null,
     open_bar: false,
     guestsNumber: 0,
-    photographer: false
+    photographer: false,
+    seguro: false
   }
 
 
@@ -144,7 +146,8 @@ export class NuevoEventoComponent implements OnInit{
       cateringId: null,
       musicianId: null,
       open_bar: false,
-      photographer: false
+      photographer: false,
+      seguro: false
     };
     
 
@@ -399,6 +402,10 @@ export class NuevoEventoComponent implements OnInit{
 
     if (this.form.photographer) {
       this.precioTotal += 800;
+    }
+
+    if (this.form.seguro) {
+      this.precioTotal += 20;
     }
 
     console.log(this.form);

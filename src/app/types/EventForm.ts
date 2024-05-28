@@ -10,4 +10,5 @@ export type EventForm = {
     open_bar: boolean;
     guestsNumber: number;
     photographer: boolean;
+    seguro: boolean;
 }
