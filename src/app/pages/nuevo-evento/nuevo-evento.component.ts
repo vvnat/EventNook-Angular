@@ -306,13 +306,17 @@ export class NuevoEventoComponent implements OnInit{
       this.precioTotal += space.price;
     });
 
-    this.cateringService.findById(this.form.cateringId || 0).subscribe(catering => {
-      this.precioTotal += catering.price;
-    });
+    if(this.form.cateringId !== null){
+      this.cateringService.findById(this.form.cateringId || 0).subscribe(catering => {
+        this.precioTotal += catering.price;
+      });
+  }
 
-    this.musicianService.findById(this.form.musicianId || 0).subscribe(musician => {
-      this.precioTotal += musician.price;
-    });
+    if(this.form.musicianId !== null){
+      this.musicianService.findById(this.form.musicianId || 0).subscribe(musician => {
+        this.precioTotal += musician.price;
+      });
+    }
 
     if (this.form.open_bar) {
       this.precioTotal += this.form.guestsNumber * 5;
