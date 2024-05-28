@@ -22,7 +22,11 @@ export class EventService {
     return this.http.get<Event[]>(`${this.url}/events`);
   }
 
+  findById(id: number): Observable<Event> {
+    return this.http.get<Event>(`${this.url}/events/${id}`);
+  }
+
   create(event: Omit<Event, 'id'>): Observable<Event> {
-    return this.http.post<Event>(`${this.url}/events`, event);
+    return this.http.post<Event>(`${this.url}/event/create`, event);
   }
 }

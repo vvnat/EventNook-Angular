@@ -18,20 +18,25 @@ import { MusicianService } from '../../services/musician.service';
 import { MusicianBooking } from '../../types/MusicianBooking';
 import { MusicianBookingService } from '../../services/musician-booking.service';
 import { EventService } from '../../services/event.service';
-import { Event } from '../../types/Event';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../types/User';
+import { RouterLink } from '@angular/router';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe],
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe, RouterLink],
   providers: [CookieService],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
-export class NuevoEventoComponent {
+export class NuevoEventoComponent implements OnInit{
+
+  ngOnInit(): void {
+    console.log(this.userId);
+  }
 
   cookieService: CookieService = inject(CookieService);
   userService: UserService = inject(UserService);
@@ -54,8 +59,6 @@ export class NuevoEventoComponent {
   musicianBookingService: MusicianBookingService = inject(MusicianBookingService);
 
   eventService: EventService = inject(EventService);
-
-  creatorId = 1;
 
   selectedSpace: string = "";
   selectedCatering: string = "";
@@ -110,13 +113,15 @@ export class NuevoEventoComponent {
     guestsNumber: 0,
     photographer: false
   }
+
+
   precioTotal: number = 0;
 
   onEventForm(): void {
     const formValue = this.eventForm.value;
 
       this.form = {
-      creatorId: this.creatorId,
+      creatorId: this.userId,
       eventType: formValue.eventType,
       startDate: formValue.startDate,
       endDate: formValue.endDate,
@@ -297,6 +302,7 @@ export class NuevoEventoComponent {
 
     //calcular precio total
     this.spaceService.findById(this.form.spaceId || 0).subscribe(space => {
+      //multiplicar por el número de días
       this.precioTotal += space.price;
     });
 
@@ -316,6 +322,7 @@ export class NuevoEventoComponent {
       this.precioTotal += 800;
     }
 
+    console.log(this.form);
     
     if(this.form.spaceId !== null){
        this.selectedSpace = this.spacesByTypeAndCapacity.find(space => space.id === this.form.spaceId)?.name || "Sin espacio seleccionado";
@@ -336,11 +343,13 @@ export class NuevoEventoComponent {
       this.selectedMusician = "Sin músico seleccionado";
     }
 
+    console.log(this.form);
+
   }
 
   onSave(): void {
     this.eventService.create(this.form).subscribe(event => {
-      
+      console.log(event);
     });
   }
   

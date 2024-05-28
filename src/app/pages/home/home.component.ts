@@ -32,6 +32,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.findEventsByUser(this.userId);
+    console.log(this.userId);
   }
 
   findEventsByUser(userId: number): void {
