@@ -29,21 +29,24 @@ export class EventComponent implements OnInit {
     public restaurantService: RestaurantService
   ) { }
 
-  ngOnInit(): void {
-    this.eventService.findAll().subscribe({
-      next: (response: Event[]) => {
-        console.log(response);
-        this.events = response;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    })
-    this.findSpaceNameById(this.event.spaceId||1);
-    this.getRestaurantName(this.event.restaurantId||1);
-    this.getSpaceImageUrl(this.event.spaceId||1);
-    this.getRestaurantImageUrl(this.event.restaurantId||1);
-}
+   now: Date = new Date();
+
+    ngOnInit(): void {
+      console.log("Today date: "+this.now);
+      this.eventService.findAll().subscribe({
+        next: (response: Event[]) => {
+          console.log(response);
+          this.events = response.filter((event) => event.endDate <= this.now);
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
+      this.findSpaceNameById(this.event.spaceId||1);
+      this.getRestaurantName(this.event.restaurantId||1);
+      this.getSpaceImageUrl(this.event.spaceId||1);
+      this.getRestaurantImageUrl(this.event.restaurantId||1);
+  }
 
 findSpaceNameById(spaceId: number): void {
   this.spaceService.findById(spaceId).subscribe((space) => {
