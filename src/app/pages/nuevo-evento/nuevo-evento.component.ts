@@ -44,6 +44,10 @@ export class NuevoEventoComponent {
 
   eventService: EventService = inject(EventService);
 
+  selectedSpace: string = "";
+  selectedCatering: string = "";
+  selectedMusician: string = "";
+
   protected eventTypes = [
     { id: 1, name: 'Bodas y comuniones' },
     { id: 2, name: 'Comidas y cenas de empresa' },
@@ -165,6 +169,35 @@ export class NuevoEventoComponent {
     }
   }
 
+  cateringNotSelected(){
+    this.form.cateringId = null;
+    console.log(this.form);
+
+      //visibilidad section
+      const sectionElement3 = document.getElementById('section3');
+      if (sectionElement3) {
+        sectionElement3.style.display = 'none';
+      }
+  
+      //recupero músicos
+       this.musicianBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(musicians => {
+        this.reservasMusiciansByDateRange = musicians;
+  
+        this.reservedMusicians = this.reservasMusiciansByDateRange.map(reserva => reserva.musicianId);
+  
+        this.musicianService.findByEventType(this.form.eventType).subscribe(musicians => {
+          this.musicians = musicians.filter(musicians => !this.reservedMusicians.includes(musicians.id));
+        });
+        
+      });
+  
+      //visibilidad section
+      const sectionElement4 = document.getElementById('section4');
+      if (sectionElement4) {
+        sectionElement4.style.display = 'block';
+      }
+  }
+
   cateringSelected(cateringId: number): void {
     this.form.cateringId = cateringId;
     console.log(this.form);
@@ -192,6 +225,24 @@ export class NuevoEventoComponent {
     if (sectionElement4) {
       sectionElement4.style.display = 'block';
     }
+  }
+
+  musicianNotSelected(){
+    this.form.musicianId = null;
+    console.log(this.form);
+
+     //visibilidad section
+     const sectionElement4 = document.getElementById('section4');
+     if (sectionElement4) {
+       sectionElement4.style.display = 'none';
+     }
+ 
+     //visibilidad section
+     const sectionElement5 = document.getElementById('section5');
+     if (sectionElement5) {
+       sectionElement5.style.display = 'block';
+     }
+  
   }
 
   musicianSelected(musicianId: number): void {
@@ -249,11 +300,25 @@ export class NuevoEventoComponent {
       this.precioTotal += 800;
     }
 
-    const selectedSpace = this.spacesByTypeAndCapacity.find(space => space.id === this.form.spaceId);
+    
+    if(this.form.spaceId !== null){
+       this.selectedSpace = this.spacesByTypeAndCapacity.find(space => space.id === this.form.spaceId)?.name || "Sin espacio seleccionado";
+       console.log(this.selectedSpace);
+    }else{
+      this.selectedSpace = "Sin espacio seleccionado";
+    }
 
-    const selectedCatering = this.caterings.find(catering => catering.id === this.form.cateringId);
+    if(this.form.cateringId !== null){
+      this.selectedCatering = this.caterings.find(catering => catering.id === this.form.cateringId)?.name || "Sin catering seleccionado";
+    }else{
+      this.selectedCatering = "Sin catering seleccionado";
+    }
 
-    const selectedMusician = this.musicians.find(musician => musician.id === this.form.musicianId);
+    if(this.form.musicianId !== null){
+      this.selectedMusician = this.musicians.find(musician => musician.id === this.form.musicianId)?.name || "Sin músico seleccionado";
+    }else{
+      this.selectedMusician = "Sin músico seleccionado";
+    }
 
   }
 

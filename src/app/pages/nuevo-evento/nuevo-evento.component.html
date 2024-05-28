@@ -54,7 +54,7 @@
 
     <section id="section3" style="display: none;">
         <p>Caterings disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
-        <div>
+        <div (click)="cateringNotSelected()">
             <h4>Seguir sin servicio de catering</h4>
             <img src="../../../assets/icons/icono-flecha.png" alt="seguir">
         </div>
@@ -73,7 +73,7 @@
 
     <section id="section4" style="display: none;">
         <p>Músicos disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
-        <div>
+        <div (click)="musicianNotSelected()">
             <h4>Seguir sin servicio de música</h4>
             <img src="../../../assets/icons/icono-flecha.png" alt="seguir">
         </div>
@@ -110,10 +110,9 @@
         <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
         <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>
         <p>Número de invitados: {{form.guestsNumber}}</p>
-        <p>Espacio seleccionado: {{spaceSelected.name}}</p>
-        <p>Catering seleccionado: {{cateringSelected.name}}</p>
-        <p>Músico seleccionado: {{musicianSelected.name}}</p>
-        <p>Extras seleccionados: </p>
+        <p>Espacio seleccionado: {{selectedSpace}}</p>
+        <p>Catering seleccionado: {{selectedCatering}}</p>
+        <p>Músico seleccionado: {{selectedMusician}}</p>
         <span>Barra libre de bebidas: </span>
         @if (form.open_bar) {
             <span>Sí</span>
@@ -121,7 +120,7 @@
             <span>No</span>
         }
         <p> </p>
-        <span>Fotógrafo:</span>
+        <span>Fotógrafo: </span>
         @if (form.photographer) {
             <span>Sí</span>
         }@else {
