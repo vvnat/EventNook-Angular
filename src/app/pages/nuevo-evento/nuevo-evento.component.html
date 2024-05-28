@@ -52,6 +52,23 @@
             }
     </section>
 
+    <section id="sectionRestaurantes" style="display: none;">
+        <p>Restaurantes disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
+        @for (restaurant of restaurants; track restaurant.id) {
+            <article class="restaurant">
+                <h3>{{ restaurant.name }}</h3>
+                    <img [src]="restaurant.image" [alt]="restaurant.name">
+                    <div>
+                    <p>{{ restaurant.description }}</p>
+                    <p>{{ restaurant.price }} €/persona</p>
+                    <p>Dirección: {{restaurant.address}}</p>
+                    <p>Contacto: {{restaurant.contactNumber}}</p>
+                    </div>
+                    <button (click)="restaurantSelected(restaurant.id)" class="seleccionarButton">Seleccionar</button>
+            </article>
+        }
+    </section>
+
     <section id="section3" style="display: none;">
         <p>Caterings disponibles para el {{form.startDate | date:'dd/MM/yyyy'}} -> {{form.endDate | date:'dd/MM/yyyy'}}</p>
         <div (click)="cateringNotSelected()">
@@ -105,7 +122,7 @@
     </section>
 
     <section id="resumen" style="display: none;">
-        <h2>Resumen del evento:</h2>
+        <h2>Resumen</h2>
         <p>Tipo de evento: {{eventTypes[form.eventType].name}}</p>
         <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
         <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>

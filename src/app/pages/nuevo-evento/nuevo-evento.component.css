@@ -44,8 +44,10 @@ section {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin: 0 auto;
     text-align: justify;
+    box-shadow: 0px 8px 40px rgba(148.23, 64.339, 255, 0.20);
+    border-radius: 10px;
 }
 
 form{
@@ -174,7 +176,7 @@ button{
     box-shadow: 0px 8px 12px rgba(79, 38, 133, 0.2);
 }
 
-.space{
+.space, .restaurant{
     display: flex;
     margin: 0 auto;
     width: 100%;
@@ -238,7 +240,7 @@ button{
     display: none;
 }
 
-#section3, #section4, #section5{
+#section3, #section4, #section5, #sectionRestaurantes{
     p+div{
         width: 100%;
         display: flex;

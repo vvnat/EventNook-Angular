@@ -23,6 +23,10 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../types/User';
 import { RouterLink } from '@angular/router';
 import { OnInit } from '@angular/core';
+import { RestaurantService } from '../../services/restaurant.service';
+import { RestaurantBookingService } from '../../services/restaurant-booking.service';
+import { Restaurant } from '../../types/Restaurant';
+import { RestaurantBooking } from '../../types/RestaurantBooking';
 
 @Component({
   selector: 'app-nuevo-evento',
@@ -52,6 +56,9 @@ export class NuevoEventoComponent implements OnInit{
   spaceService: SpaceService = inject(SpaceService);
   spaceBookingService: SpaceBookingService = inject(SpaceBookingService);
 
+  restaurantService: RestaurantService = inject(RestaurantService);
+  restaurantBookingService: RestaurantBookingService = inject(RestaurantBookingService);
+
   cateringBookingService: CateringBookingService = inject(CateringBookingService);
   cateringService: CateringService = inject(CateringService);
 
@@ -61,6 +68,7 @@ export class NuevoEventoComponent implements OnInit{
   eventService: EventService = inject(EventService);
 
   selectedSpace: string = "";
+  selectedRestaurant: string = "";
   selectedCatering: string = "";
   selectedMusician: string = "";
 
@@ -89,6 +97,11 @@ export class NuevoEventoComponent implements OnInit{
   spacesByTypeAndCapacity: Space[] = [];
   reservasByDateRange: SpaceBooking[] = [];
   reservedSpacesId: number[] = [];
+
+  //restaurants
+  restaurants: Restaurant[] = [];
+  reservasRestaurantByDateRange: RestaurantBooking[] = [];
+  reservedRestaurants: number[] = [];
 
   //caterings
   reservasCateringsByDateRange: CateringBooking[] = [];
@@ -137,8 +150,32 @@ export class NuevoEventoComponent implements OnInit{
 
     console.log(this.form);
 
-    //recuperando espacios por rango de fecha, tipo de evento y aforo
-    this.spaceBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
+    if (this.form.eventType == 1) {
+       //recuperando restaurantes por rango de fecha
+      this.restaurantBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
+        this.reservasRestaurantByDateRange = reservas;
+
+        this.reservedRestaurants = this.reservasRestaurantByDateRange.map(reserva => reserva.restaurantId);
+
+        this.restaurantService.findAll().subscribe(restaurants => {
+          this.restaurants = restaurants.filter(restaurant => !this.reservedRestaurants.includes(restaurant.id));
+        });
+        console.log("restarurantes: "+this.restaurants);
+      });
+
+      //cambiando visibilidad de las secciones
+      const sectionElement = document.getElementById('sectionForm');
+      if (sectionElement) {
+        sectionElement.style.display = 'none';
+      }
+
+      const sectionRestaurantes = document.getElementById('sectionRestaurantes');
+      if (sectionRestaurantes) {
+        sectionRestaurantes.style.display = 'block';
+      }
+    }else{
+      //recuperando espacios por rango de fecha, tipo de evento y aforo
+      this.spaceBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(reservas => {
       this.reservasByDateRange = reservas;
 
       this.reservedSpacesId = this.reservasByDateRange.map(reserva => reserva.spaceId);
@@ -148,16 +185,17 @@ export class NuevoEventoComponent implements OnInit{
       });
 
     });
+      //cambiando visibilidad de las secciones
+      const sectionElement = document.getElementById('sectionForm');
+      if (sectionElement) {
+        sectionElement.style.display = 'none';
+      }
+  
+      const sectionElement2 = document.getElementById('section2');
+      if (sectionElement2) {
+        sectionElement2.style.display = 'block';
+      }
 
-    //cambiando visibilidad de las secciones
-    const sectionElement = document.getElementById('sectionForm');
-    if (sectionElement) {
-      sectionElement.style.display = 'none';
-    }
-
-    const sectionElement2 = document.getElementById('section2');
-    if (sectionElement2) {
-      sectionElement2.style.display = 'block';
     }
   }
 
@@ -187,6 +225,35 @@ export class NuevoEventoComponent implements OnInit{
     const sectionElement3 = document.getElementById('section3');
     if (sectionElement3) {
       sectionElement3.style.display = 'block';
+    }
+  }
+
+  restaurantSelected(restaurantId: number): void {
+    this.form.restaurantId = restaurantId;
+    console.log(this.form);
+
+    //visibilidad section
+    const sectionRestaurantes = document.getElementById('sectionRestaurantes');
+    if (sectionRestaurantes) {
+      sectionRestaurantes.style.display = 'none';
+    }
+
+    //recupero músicos
+     this.musicianBookingService.findByDateRange(this.form.startDate, this.form.endDate).subscribe(musicians => {
+      this.reservasMusiciansByDateRange = musicians;
+
+      this.reservedMusicians = this.reservasMusiciansByDateRange.map(reserva => reserva.musicianId);
+
+      this.musicianService.findByEventType(this.form.eventType).subscribe(musicians => {
+        this.musicians = musicians.filter(musicians => !this.reservedMusicians.includes(musicians.id));
+      });
+      
+    });
+
+    //visibilidad section
+    const sectionElement4 = document.getElementById('section4');
+    if (sectionElement4) {
+      sectionElement4.style.display = 'block';
     }
   }
 
@@ -301,10 +368,18 @@ export class NuevoEventoComponent implements OnInit{
 
 
     //calcular precio total
-    this.spaceService.findById(this.form.spaceId || 0).subscribe(space => {
-      //multiplicar por el número de días
-      this.precioTotal += space.price;
-    });
+    if(this.form.spaceId !== null){
+      this.spaceService.findById(this.form.spaceId || 0).subscribe(space => {
+        //multiplicar por el número de días
+        this.precioTotal += space.price;
+      });
+    }
+
+    if(this.form.restaurantId !== null){
+      this.restaurantService.findById(this.form.restaurantId || 0).subscribe(restaurant => {
+        this.precioTotal += restaurant.price;
+      });
+    }
 
     if(this.form.cateringId !== null){
       this.cateringService.findById(this.form.cateringId || 0).subscribe(catering => {
@@ -333,6 +408,12 @@ export class NuevoEventoComponent implements OnInit{
        console.log(this.selectedSpace);
     }else{
       this.selectedSpace = "Sin espacio seleccionado";
+    }
+
+    if(this.form.restaurantId !== null){
+      this.selectedRestaurant = this.restaurants.find(restaurant => restaurant.id === this.form.restaurantId)?.name || "Sin restaurante seleccionado";
+    }else{
+      this.selectedRestaurant = "Sin restaurante seleccionado";
     }
 
     if(this.form.cateringId !== null){
