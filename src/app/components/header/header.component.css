@@ -68,6 +68,13 @@ p-dropdown {
 
 @media (max-width: 768px) {
     img {
-        display: none;
+        width: 120px;
+        float: left;
+    }
+    a:first-of-type {
+        margin-right: 70px;
+    }
+    nav{
+        justify-content: right;
     }
 }

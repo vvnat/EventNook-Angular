@@ -98,8 +98,8 @@
     article{
         width: 100%;
         max-height: none;
+        padding-bottom: 20px;
         grid-template-columns: 1fr;
-        grid-template-rows: 50px 200px;
     }
 
     article img{

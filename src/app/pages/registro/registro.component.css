@@ -153,6 +153,7 @@ main {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        height: 100vh;
         
 
         section:nth-of-type(2){
@@ -168,7 +169,7 @@ main {
             width: 80%;
 
             img {
-                max-width: 300px;
+                max-width: 220px;
             }
 
             h2 {
@@ -177,7 +178,6 @@ main {
             }
 
             .btn-wrapper {
-                gap: 20px;
 
                 button {
                     padding: 10px 20px;

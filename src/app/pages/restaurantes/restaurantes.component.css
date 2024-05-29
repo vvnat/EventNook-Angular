@@ -85,7 +85,7 @@ section+div button:disabled{
 }
 
 @media screen and (max-width: 768px){
-  
+    
   main {
       width: 85%;
       flex-direction: column;
@@ -96,18 +96,15 @@ section+div button:disabled{
   article{
       width: 100%;
       max-height: none;
-  }
-
-  article a{
+      padding-bottom: 20px;
       grid-template-columns: 1fr;
-      grid-template-rows: 50px 200px;
   }
 
-  article a img{
+  article img{
       display: none;
   }
 
-  article a div{
+  article div{
       grid-row: 2/3;
       grid-column: 1/3;
   }
