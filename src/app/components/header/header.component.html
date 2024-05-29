@@ -5,10 +5,12 @@
     <a routerLink="/crear">
         Crear evento
     </a>
-    <a href="">
-        Explorar
-    </a>
-    <a href="">
-       <!-- <img src="{{userImg}}" alt="foto perfil">-->
-    </a>
+    <p-dropdown 
+    formControlName="selectedOption"
+    [options]="opciones" 
+    optionLabel="name" 
+    placeholder="Explorar"
+    styleClass="custom-dd" 
+    class="custom-dd"
+    (onChange)="onChange($event)"/>
 </div>
