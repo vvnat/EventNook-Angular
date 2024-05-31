@@ -49,7 +49,7 @@ section {
     border-radius: 10px;
 
     div{
-        width: 45%;
+        width: 55%;
         margin: 0 auto;
     }
 
@@ -246,6 +246,12 @@ button{
 
 .displayNone{
     display: none;
+}
+
+.mensaje{
+    color: var(--dark-gray);
+    font-size: 14px;
+    text-align: left;
 }
 
 #section3, #section4, #section5, #sectionRestaurantes{

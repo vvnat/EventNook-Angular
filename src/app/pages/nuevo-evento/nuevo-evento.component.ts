@@ -47,6 +47,8 @@ export class NuevoEventoComponent implements OnInit{
 
   user: User = JSON.parse(this.cookieService.get('user'));
 
+  correoUsuario: string = this.user.email || "";
+
   userId:number = this.user.id || 0;
 
   datetime24h: Date[] | undefined;
@@ -441,7 +443,7 @@ export class NuevoEventoComponent implements OnInit{
 
   onSave(): void {
     this.eventService.create(this.form).subscribe(event => {
-      console.log(event);
+      window.location.reload();
     });
   }
   
