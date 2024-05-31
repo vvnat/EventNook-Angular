@@ -85,6 +85,10 @@
   section+div button:disabled{
     display: none;
   }
+
+  app-footer{
+    width: 100%;
+  }
   
   @media screen and (max-width: 768px){
     

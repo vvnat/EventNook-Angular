@@ -75,6 +75,7 @@ main {
     .form-section {
         flex-grow: 2;
         padding: 0 35px;
+        max-width: 420px;
 
         img {
             margin-bottom: 20px;

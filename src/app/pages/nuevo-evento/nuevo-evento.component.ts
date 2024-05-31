@@ -27,11 +27,12 @@ import { RestaurantService } from '../../services/restaurant.service';
 import { RestaurantBookingService } from '../../services/restaurant-booking.service';
 import { Restaurant } from '../../types/Restaurant';
 import { RestaurantBooking } from '../../types/RestaurantBooking';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe, RouterLink],
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe, RouterLink, FooterComponent],
   providers: [CookieService],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'

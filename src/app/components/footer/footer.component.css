@@ -1,0 +1,23 @@
+footer{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+
+    p{
+        font-size: 13px;
+        margin: 0;
+        margin-bottom: 10px;
+        color: rgb(98, 105, 101);
+    }
+
+    div{
+        text-align: right;
+    }
+}
+hr{
+    margin-top: 80px;
+    color: rgb(98, 105, 101);
+    width: 80%;
+}

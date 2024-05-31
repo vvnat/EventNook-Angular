@@ -110,6 +110,10 @@ article{
   clear: both;
 }
 
+app-footer{
+  width: 100%;
+}
+
 @media (max-width: 768px){
   main{
     width: 90%;

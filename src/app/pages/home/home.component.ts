@@ -8,6 +8,7 @@ import { EventComponent } from '../../components/event/event.component';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../types/User';
 import { UserService } from '../../services/user.service';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { UserService } from '../../services/user.service';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, RouterLink, DatePipe, EventComponent],
+    imports: [HeaderComponent, RouterLink, DatePipe, EventComponent, FooterComponent],
     providers: [CookieService]
 })
 export class HomeComponent {

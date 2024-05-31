@@ -173,7 +173,7 @@ input[type="number"]{
 button{
     width: 15%;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     border-radius: 10px;
     border: none;
     font-family: Lexend, sans-serif;
@@ -198,7 +198,7 @@ button{
     box-shadow: 0px 4px 8px 0px rgba(54, 44, 0, 0.25);
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
   
     h3{
       grid-row: 1/2;
@@ -280,6 +280,13 @@ button{
     }
 }
 
+#section5{
+    margin-bottom: 17%;
+    button{
+        margin-top: 20px;
+    }
+}
+
 .extraServices{
     display: flex;
     justify-content: center;
@@ -287,6 +294,10 @@ button{
     margin: 0 auto;
     width: 100%;
     gap: 10px;
+
+    div{
+        width: 100%;
+    }
 
     input[type="checkbox"] {
         display: none; /* Oculta el checkbox */
@@ -326,7 +337,7 @@ button{
     box-shadow: 0px 4px 8px 0px rgba(54, 44, 0, 0.25);
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 4fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
   
     h3{
       grid-row: 1/2;
@@ -349,6 +360,9 @@ button{
     }
 }
 
+app-footer{
+    width: 100%;
+  }
 
 @media (max-width: 768px){
     main{
