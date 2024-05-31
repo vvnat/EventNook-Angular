@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit{
     private authService: AuthService,
     private router: Router
   ) { }
-
   
   userSignalService: UserSignalService = inject(UserSignalService);
   ngOnInit(): void {
@@ -57,7 +56,6 @@ export class LoginComponent implements OnInit{
         setTimeout(() => {
           this.router.navigate(["/home"])
         }, 500);
-        /*this.router.navigate(["/home"]);*/
         console.log(user);
       },
       error: (error: any) => {
@@ -74,6 +72,11 @@ export class LoginComponent implements OnInit{
 
   getPasswordErrors() {
     if (this.loginForm.controls.password.hasError('required')) return 'El campo es requerido.';
+    return '';
+  }
+
+  getLoginError(){
+    if (this.loginError) return 'Usuario o contraseña incorrectos.';
     return '';
   }
 

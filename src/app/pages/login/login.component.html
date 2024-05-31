@@ -12,6 +12,9 @@
         @if (loginForm.controls.password.invalid && submited) {
           <p class="error">{{getPasswordErrors()}}</p>
         }
+        @if(loginError){
+          <p class="error">{{getLoginError()}}</p>
+        }
         <div class="btn-wrapper">
             <button class="btn-primary"> Entrar </button>
         </div>
