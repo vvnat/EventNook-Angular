@@ -44,12 +44,23 @@ export class NuevoEventoComponent implements OnInit{
 
   isLoggedIn: boolean = false;
 
+  user: User = {} as User;
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    const userCookie = this.cookieService.get('user');
+    if (userCookie) {
+      try {
+        this.user = JSON.parse(userCookie);
+        this.userId = this.user.id;
+      } catch (error) {
+        console.error('Error parsing user cookie:', error);
+      }
+    }
     this.authService.loggedIn$.subscribe((value) => {
       this.isLoggedIn = value;
     });
@@ -58,8 +69,6 @@ export class NuevoEventoComponent implements OnInit{
 
   cookieService: CookieService = inject(CookieService);
   userService: UserService = inject(UserService);
-
-  user: User = JSON.parse(this.cookieService.get('user'));
 
   correoUsuario: string = this.user.email || "";
 
