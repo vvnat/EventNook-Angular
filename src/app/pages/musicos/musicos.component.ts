@@ -3,15 +3,20 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { MusicianService } from '../../services/musician.service';
 import { Musician } from '../../types/Musician';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-musicos',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, LoginComponent],
   templateUrl: './musicos.component.html',
   styleUrl: './musicos.component.css'
 })
 export class MusicosComponent implements OnInit{
+
+  isLoggedIn: boolean = false;
+
   protected musicians: Musician[] = [];
   protected paginatedMusicians: Musician[] = [];
 
@@ -19,10 +24,14 @@ export class MusicosComponent implements OnInit{
   protected pageIndex: number = 0;
 
   constructor(
-    private musicianService: MusicianService
+    private musicianService: MusicianService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.musicianService.findAll().subscribe({
       next: (response: Musician[]) => {
         console.log(response);

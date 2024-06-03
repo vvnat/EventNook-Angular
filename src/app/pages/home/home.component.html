@@ -1,4 +1,5 @@
-<app-header></app-header>
+@if (isLoggedIn) {
+    <app-header></app-header>
     <main>
         <div>
             <section>
@@ -25,7 +26,7 @@
             </a>
         </article>
         <article class="tarjeta">
-            <a href="/caterings">
+            <a routerLink="/caterings">
                 <img src="/assets/icons/caterings.png" alt="caterings">
             <div>
                 <h4>Caterings</h4>
@@ -34,7 +35,7 @@
             </a>
         </article>
         <article class="tarjeta">
-            <a href="/musicians">
+            <a routerLink="/musicians">
                 <img src="/assets/icons/musicos.png" alt="musicos">
             <div>
                 <h4>Músicos</h4>
@@ -43,7 +44,7 @@
             </a>
         </article>
         <article class="tarjeta">
-            <a href="/restaurants">
+            <a routerLink="/restaurants">
                 <img src="/assets/icons/restaurantes.png" alt="espacios">
             <div>
                 <h4>Restaurantes</h4>
@@ -55,3 +56,6 @@
 </div>
 </main>
 <app-footer></app-footer>
+}@if (!isLoggedIn){
+    <app-login></app-login>
+} 

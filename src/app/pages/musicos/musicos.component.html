@@ -1,4 +1,5 @@
-<app-header></app-header>
+@if (isLoggedIn) {
+  <app-header></app-header>
 <main>
     <h1>Nuestros músicos</h1>
     <section>
@@ -19,3 +20,7 @@
     </div>
   </main>
   <app-footer></app-footer>
+}
+@if (!isLoggedIn) {
+  <app-login></app-login>
+}

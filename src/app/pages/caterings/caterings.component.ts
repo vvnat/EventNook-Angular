@@ -3,15 +3,20 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { CateringService } from '../../services/catering.service';
 import { Catering } from '../../types/Catering';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { AuthService } from '../../services/auth.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-caterings',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, LoginComponent],
   templateUrl: './caterings.component.html',
   styleUrl: './caterings.component.css'
 })
 export class CateringsComponent implements OnInit{
+
+  isLoggedIn: boolean = false;
+
   protected caterings: Catering[] = [];
   protected paginatedCaterings: Catering[] = [];
 
@@ -19,10 +24,14 @@ export class CateringsComponent implements OnInit{
   protected pageIndex: number = 0;
 
   constructor(
-    private cateringService: CateringService
+    private cateringService: CateringService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.cateringService.findAll().subscribe({
       next: (response: Catering[]) => {
         console.log(response);

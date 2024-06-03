@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit{
   cookieService: CookieService = inject(CookieService);
   loginError: boolean = false;
   submited: boolean = false;
+  logged: boolean = false;
 
   loginForm = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -34,9 +35,11 @@ export class LoginComponent implements OnInit{
   ) { }
   
   userSignalService: UserSignalService = inject(UserSignalService);
+
   ngOnInit(): void {
     if (this.userSignalService.user().id) {
       this.router.navigate(["/home"])
+      this.logged = true;
     }
   }
 
@@ -53,6 +56,7 @@ export class LoginComponent implements OnInit{
       next: (user: User) => {
         this.writeUserCookie(user as User);
         this.userSignalService.updateUser(user as User);
+        this.authService.setLoggedIn(true);
         setTimeout(() => {
           this.router.navigate(["/home"])
         }, 500);
@@ -61,6 +65,7 @@ export class LoginComponent implements OnInit{
       error: (error: any) => {
         console.log(error);
         this.loginError = true;
+        this.authService.setLoggedIn(false);
       }
     })
   }

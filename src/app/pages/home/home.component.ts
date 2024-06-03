@@ -9,6 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { User } from '../../types/User';
 import { UserService } from '../../services/user.service';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { AuthService } from '../../services/auth.service';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, RouterLink, DatePipe, EventComponent, FooterComponent],
+    imports: [HeaderComponent, RouterLink, DatePipe, EventComponent, FooterComponent, LoginComponent],
     providers: [CookieService]
 })
 export class HomeComponent {
@@ -27,11 +29,17 @@ export class HomeComponent {
 
   userId:number = this.user.id;
 
+  isLoggedIn: boolean = false;
+
   constructor(
-    private eventService: EventService
+    private eventService: EventService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.findEventsByUser(this.userId);
     console.log(this.userId);
   }

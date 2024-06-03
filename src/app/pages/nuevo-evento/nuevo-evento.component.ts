@@ -28,18 +28,29 @@ import { RestaurantBookingService } from '../../services/restaurant-booking.serv
 import { Restaurant } from '../../types/Restaurant';
 import { RestaurantBooking } from '../../types/RestaurantBooking';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-nuevo-evento',
   standalone: true,
-  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe, RouterLink, FooterComponent],
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CalendarModule, DatePipe, RouterLink, FooterComponent, LoginComponent],
   providers: [CookieService],
   templateUrl: './nuevo-evento.component.html',
   styleUrl: './nuevo-evento.component.css'
 })
 export class NuevoEventoComponent implements OnInit{
 
+  isLoggedIn: boolean = false;
+
+  constructor(
+    private authService: AuthService
+  ) { }
+
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     console.log(this.userId);
   }
 
@@ -444,7 +455,7 @@ export class NuevoEventoComponent implements OnInit{
 
   onSave(): void {
     this.eventService.create(this.form).subscribe(event => {
-      window.location.reload();
+      //window.location.reload();
     });
   }
   

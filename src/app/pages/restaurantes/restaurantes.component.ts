@@ -3,16 +3,21 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { RestaurantService } from '../../services/restaurant.service';
 import { Restaurant } from '../../types/Restaurant';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
   selector: 'app-restaurantes',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, LoginComponent],
   templateUrl: './restaurantes.component.html',
   styleUrl: './restaurantes.component.css'
 })
 export class RestaurantesComponent implements OnInit{
+
+  isLoggedIn: boolean = false;
+
   protected restaurants: Restaurant[] = [];
   protected paginatedRestaurants: Restaurant[] = [];
 
@@ -21,10 +26,14 @@ export class RestaurantesComponent implements OnInit{
 
 
   constructor(
-    private restaurantService: RestaurantService
+    private restaurantService: RestaurantService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.restaurantService.findAll().subscribe({
       next: (response: Restaurant[]) => {
         console.log(response);

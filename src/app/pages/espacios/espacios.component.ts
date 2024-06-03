@@ -3,15 +3,20 @@ import { HeaderComponent } from '../../components/header/header.component';
 import {SpaceService} from '../../services/space.service';
 import {Space} from '../../types/Space';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { LoginComponent } from '../login/login.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-espacios',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, LoginComponent],
   templateUrl: './espacios.component.html',
   styleUrl: './espacios.component.css'
 })
 export class EspaciosComponent implements OnInit{
+
+  isLoggedIn: boolean = false;
+
   protected spaces: Space[] = [];
   protected paginatedSpaces: Space[] = [];
 
@@ -21,10 +26,14 @@ export class EspaciosComponent implements OnInit{
   protected pageIndex: number = 0;
 
   constructor(
-    private spaceService: SpaceService
+    private spaceService: SpaceService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.loggedIn$.subscribe((value) => {
+      this.isLoggedIn = value;
+    });
     this.spaceService.findAll().subscribe({
       next: (response: Space[]) => {
         console.log(response);
