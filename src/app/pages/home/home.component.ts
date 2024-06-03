@@ -22,14 +22,14 @@ import { LoginComponent } from '../login/login.component';
     providers: [CookieService]
 })
 export class HomeComponent {
+  isLoggedIn: boolean = false;
+  
   cookieService: CookieService = inject(CookieService);
   userService: UserService = inject(UserService);
   user: User = JSON.parse(this.cookieService.get('user'));
   events: Event[] = [];
 
   userId:number = this.user.id;
-
-  isLoggedIn: boolean = false;
 
   constructor(
     private eventService: EventService,
