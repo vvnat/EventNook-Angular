@@ -1,3 +1,3 @@
 export const env = {
-    apiUrl: "http://144.126.244.179:8888/api/v1"
+    apiUrl: "https://domingas.jotade.dev/api/v1"
 }
