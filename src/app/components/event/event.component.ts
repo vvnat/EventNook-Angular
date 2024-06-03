@@ -35,7 +35,6 @@ export class EventComponent implements OnInit {
       console.log("Today date: "+this.now);
       this.eventService.findAll().subscribe({
         next: (response: Event[]) => {
-          console.log(response);
           this.events = response.filter((event) => event.endDate <= this.now);
         },
         error: (error: any) => {
