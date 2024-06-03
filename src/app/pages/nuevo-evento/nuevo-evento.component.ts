@@ -30,6 +30,7 @@ import { RestaurantBooking } from '../../types/RestaurantBooking';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nuevo-evento',
@@ -44,7 +45,8 @@ export class NuevoEventoComponent implements OnInit{
   isLoggedIn: boolean = false;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -455,7 +457,7 @@ export class NuevoEventoComponent implements OnInit{
 
   onSave(): void {
     this.eventService.create(this.form).subscribe(event => {
-      //window.location.reload();
+      this.router.navigate(['/home']);
     });
   }
   
