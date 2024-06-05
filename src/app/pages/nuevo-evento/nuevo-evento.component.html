@@ -31,6 +31,9 @@
             <input type="number" required formControlName="guestsNumber">
             
             <h4></h4>
+            @if (formInvalid) {
+                <p class="error">Por favor completa todos los campos del formulario antes de continuar.</p>
+            }
             <button type="submit">Continuar</button>
         </form>
     </section>

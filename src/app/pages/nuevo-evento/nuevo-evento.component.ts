@@ -50,6 +50,8 @@ export class NuevoEventoComponent implements OnInit{
 
   minEndDate: string = '';
 
+  formInvalid: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -181,7 +183,15 @@ export class NuevoEventoComponent implements OnInit{
   precioTotal: number = 0;
 
   onEventForm(): void {
-    const formValue = this.eventForm.value;
+
+    if (this.eventForm.invalid) {
+      this.formInvalid = true;
+      this.eventForm.markAllAsTouched();
+      return;
+    }
+
+     this.formInvalid = false;
+     const formValue = this.eventForm.value;
 
       this.form = {
       creatorId: this.userId,
