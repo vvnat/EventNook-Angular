@@ -36,6 +36,16 @@ section {
     border-radius: 20px;
 }
 
+.error{
+    color: red;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 #sectionForm{
     box-shadow: 0px 8px 40px rgba(148.23, 64.339, 255, 0.20);
 }
