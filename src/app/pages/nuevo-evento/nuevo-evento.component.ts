@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { EventForm } from '../../types/EventForm';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Space } from '../../types/Space';
 import { SpaceService } from '../../services/space.service';
 import { SpaceBookingService } from '../../services/space-booking.service';
@@ -46,9 +46,12 @@ export class NuevoEventoComponent implements OnInit{
 
   user: User = {} as User;
 
+  today: string = '';
+
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +67,7 @@ export class NuevoEventoComponent implements OnInit{
     this.authService.loggedIn$.subscribe((value) => {
       this.isLoggedIn = value;
     });
+    this.today = new Date().toISOString().slice(0, 16);
     console.log(this.userId);
   }
 
