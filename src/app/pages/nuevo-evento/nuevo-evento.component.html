@@ -22,8 +22,8 @@
             <div class="fechas">
                 <h4>Fecha de inicio: </h4>
                 <h4>Fecha de fin: </h4>
-                <input type="datetime-local" required formControlName="startDate" [min]="tomorrow">
-                <input type="datetime-local" required formControlName="endDate" [min]="tomorrow">
+                <input type="datetime-local" name="startDate" required formControlName="startDate" [min]="tomorrow" (change)="onStartDateChange()">
+                <input type="datetime-local" name="endDate" required formControlName="endDate" [min]="minEndDate">
 
             </div>
 

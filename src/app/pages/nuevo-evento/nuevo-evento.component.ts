@@ -48,6 +48,8 @@ export class NuevoEventoComponent implements OnInit{
 
   tomorrow: string = '';
 
+  minEndDate: string = '';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -71,7 +73,21 @@ export class NuevoEventoComponent implements OnInit{
     const tomorrowDate = new Date(today);
     tomorrowDate.setDate(today.getDate() + 1);
     this.tomorrow = tomorrowDate.toISOString().slice(0, 16);
+    this.minEndDate = this.tomorrow;
     console.log(this.userId);
+    
+  }
+
+  onStartDateChange(): void {
+    const startDateValue = this.eventForm.get('startDate')?.value;
+    if (startDateValue) {
+      this.minEndDate = new Date(startDateValue).toISOString().slice(0, 16);
+      // Update endDate control to meet new validation requirement
+      const endDateControl = this.eventForm.get('endDate');
+      if (endDateControl && endDateControl.value < this.minEndDate) {
+        endDateControl.setValue(this.minEndDate);
+      }
+    }
   }
 
   cookieService: CookieService = inject(CookieService);
