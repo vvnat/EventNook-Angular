@@ -148,6 +148,7 @@ export class RegistroComponent {
       email: formValue.email || '',
       password: formValue.password || '',
       repeatPassword: formValue.repeatPassword || '',
+      createdAt: new Date(),
     };
 
       this.userService.create(registerForm).subscribe(

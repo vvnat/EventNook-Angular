@@ -5,4 +5,5 @@ export type RegisterForm = {
   email: string;
   password: string;
   repeatPassword: string;
+  createdAt: Date;
 }
