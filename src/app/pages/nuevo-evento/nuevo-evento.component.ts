@@ -46,7 +46,7 @@ export class NuevoEventoComponent implements OnInit{
 
   user: User = {} as User;
 
-  today: string = '';
+  tomorrow: string = '';
 
   constructor(
     private authService: AuthService,
@@ -67,7 +67,10 @@ export class NuevoEventoComponent implements OnInit{
     this.authService.loggedIn$.subscribe((value) => {
       this.isLoggedIn = value;
     });
-    this.today = new Date().toISOString().slice(0, 16);
+    const today = new Date();
+    const tomorrowDate = new Date(today);
+    tomorrowDate.setDate(today.getDate() + 1);
+    this.tomorrow = tomorrowDate.toISOString().slice(0, 16);
     console.log(this.userId);
   }
 
