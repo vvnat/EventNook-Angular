@@ -138,8 +138,8 @@
         <div>
             <h2>Resumen</h2>
             <p>Tipo de evento: {{eventTypes[form.eventType].name}}</p>
-            <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy'}}</p>
-            <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy'}}</p>
+            <p>Fecha de inicio: {{form.startDate | date:'dd/MM/yyyy hh:mm'}}</p>
+            <p>Fecha de fin: {{form.endDate | date:'dd/MM/yyyy hh:mm'}}</p>
             <p>Número de invitados: {{form.guestsNumber}}</p>
             <p>Espacio seleccionado: {{selectedSpace}}</p>
             <p>Catering seleccionado: {{selectedCatering}}</p>
