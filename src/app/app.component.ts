@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { UserSignalService } from './services/user-signal.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,24 @@ export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private userSignalService: UserSignalService
+    private userSignalService: UserSignalService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
-      if(!this.userSignalService.user().id) {
-        this.router.navigate(['/login']);
-      }
+    this.userSignalService.updateUser(JSON.parse(this.cookieService.get('user')));
+    if(this.userSignalService.ready){
+      this.checkUserLogged();
+    }else{
+      this.userSignalService.isReady.subscribe(ready => {
+        this.checkUserLogged();
+      });
+    }
+  }
+
+  checkUserLogged(){
+    if(!this.userSignalService.user().id) {
+      this.router.navigate(['/login']);
+    }
   }
 }

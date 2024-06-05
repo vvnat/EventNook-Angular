@@ -1,4 +1,4 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { EventEmitter, Injectable, effect, inject, signal } from '@angular/core';
 import { User } from '../types/User';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -7,6 +7,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class UserSignalService {
   cookieService: CookieService = inject(CookieService);
+
+  public ready = false;
+
+  public isReady: EventEmitter<boolean> = new EventEmitter();
 
   private userSignal = signal({} as User);
   readonly user = this.userSignal.asReadonly();
@@ -21,6 +25,8 @@ export class UserSignalService {
 
   updateUser(user: User) {
     this.userSignal.set(user);
+    this.isReady.emit(true);
+    this.ready = true;
   }
 
   clearUser() {

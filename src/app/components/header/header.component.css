@@ -1,4 +1,4 @@
-div {
+header {
     position: fixed; 
     top: 0;
     left: 0; 
@@ -7,11 +7,27 @@ div {
     background-color: #5ED4A2;
     color: white;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
-    padding-left: 16px;
+    padding-inline: 16px;
     z-index: 1000; 
+}
+
+header>div{
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-shadow: 0px 4px 4px rgba(65, 64, 17, 0.25);
 }
 
 img {

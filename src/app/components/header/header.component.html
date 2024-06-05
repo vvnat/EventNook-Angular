@@ -1,16 +1,21 @@
-<div>
-    <a routerLink="/home">
-        <img src="../../../assets/svg/logo.svg" alt="logo">
-    </a>
-    <a routerLink="/crear">
-        Crear evento
-    </a>
-    <p-dropdown 
-    formControlName="selectedOption"
-    [options]="opciones" 
-    optionLabel="name" 
-    placeholder="Explorar"
-    styleClass="custom-dd" 
-    class="custom-dd"
-    (onChange)="onChange($event)"/>
-</div>
+<header>
+    <div>
+        <a routerLink="/home">
+            <img src="../../../assets/svg/logo.svg" alt="logo">
+        </a>
+        <a routerLink="/crear">
+            Crear evento
+        </a>
+        <p-dropdown 
+        formControlName="selectedOption"
+        [options]="opciones" 
+        optionLabel="name" 
+        placeholder="Explorar"
+        styleClass="custom-dd" 
+        class="custom-dd"
+        (onChange)="onChange($event)"/>
+    </div>
+
+
+    <button (click)="logOut()">Log out</button>
+</header>

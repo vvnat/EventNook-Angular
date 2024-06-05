@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from '../login/login.component';
+import { UserSignalService } from '../../services/user-signal.service';
 
 
 @Component({
@@ -22,14 +23,16 @@ import { LoginComponent } from '../login/login.component';
     providers: [CookieService]
 })
 export class HomeComponent {
-  isLoggedIn: boolean = false;
   
-  cookieService: CookieService = inject(CookieService);
+  //cookieService: CookieService = inject(CookieService);
+  userSignalService: UserSignalService = inject(UserSignalService);
   userService: UserService = inject(UserService);
   user: User = {} as User;
   events: Event[] = [];
 
-  userId:number = 0;
+  protected get userId(): number {
+    return this.userSignalService.user().id;
+  }
 
   constructor(
     private eventService: EventService,
@@ -37,20 +40,13 @@ export class HomeComponent {
   ) { }
 
   ngOnInit(): void {
-    const userCookie = this.cookieService.get('user');
-    if (userCookie) {
-      try {
-        this.user = JSON.parse(userCookie);
-        this.userId = this.user.id;
-      } catch (error) {
-        console.error('Error parsing user cookie:', error);
-      }
-    }
-    this.authService.loggedIn$.subscribe((value) => {
-      this.isLoggedIn = value;
-    });
-    this.findEventsByUser(this.userId);
-    console.log(this.userId);
+    if(this.userSignalService.ready){
+      this.findEventsByUser(this.userId);
+    }else{
+      this.userSignalService.isReady.subscribe(ready => {
+        this.findEventsByUser(this.userId);   
+      });
+    } 
   }
 
   findEventsByUser(userId: number): void {

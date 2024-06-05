@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { DropdownModule } from 'primeng/dropdown';
+import { UserSignalService } from '../../services/user-signal.service';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { DropdownModule } from 'primeng/dropdown';
 export class HeaderComponent {
   cookieService: CookieService = inject(CookieService);
   userService: UserService = inject(UserService);
+  userSignalService: UserSignalService = inject(UserSignalService);
 
   opciones = [ 
     { name: "Espacios", url: "/spaces" }, 
@@ -33,6 +35,12 @@ export class HeaderComponent {
     console.log(event.value);
     this.router.navigate([event.value.url]); 
 }
+
+  logOut() {
+    this.cookieService.delete('user');
+    this.userSignalService.clearUser();
+    this.router.navigate(['/login']);
+  }
 
  /* user: User = JSON.parse(this.cookieService.get('user'));
 
