@@ -414,6 +414,7 @@ export class NuevoEventoComponent implements OnInit{
   onExtraServices(): void {
     this.form.open_bar = this.eventForm.value.open_bar;
     this.form.photographer = this.eventForm.value.photographer;
+    this.form.seguro = this.eventForm.value.seguro;
 
     console.log(this.form);
 
