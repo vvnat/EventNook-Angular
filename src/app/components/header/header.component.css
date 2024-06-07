@@ -30,6 +30,10 @@ button{
     text-shadow: 0px 4px 4px rgba(65, 64, 17, 0.25);
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 img {
     box-sizing: border-box;
     max-width: 200px;
