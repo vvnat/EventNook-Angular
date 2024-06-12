@@ -17,7 +17,6 @@
         <input type="username" name="Username" placeholder="Nombre de usuario" formControlName="username">
         @if (registerForm.controls.username.invalid && submited) {
           <p class="error">{{getUserNameErrorMessage()}}</p>
-          <p class="error">{{getUserNameRegisteredErrorMessage()}}</p>
         }
 
         <input type="email" name="email" placeholder="Email" formControlName="email">

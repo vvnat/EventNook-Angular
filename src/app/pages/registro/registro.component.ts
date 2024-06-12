@@ -102,13 +102,12 @@ export class RegistroComponent {
       return 'El nombre de usuario debe tener menos de 50 caracteres';
     }
 
-    return this.registerForm.controls.username.hasError('minlength')
-      ? 'El nombre de usuario debe tener al menos 3 caracteres'
-      : '';
-  }
+    if (this.registerForm.controls.username.hasError('minlength')) {
+      return 'El nombre de usuario debe tener al menos 3 caracteres';
+    }
 
-  getUserNameRegisteredErrorMessage() {
     return this.usernameExists ? 'El nombre de usuario ya está registrado' : '';
+
   }
 
   getEmailErrorMessage() {
