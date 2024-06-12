@@ -23,6 +23,8 @@ export class RegistroComponent {
   userService: UserService = inject(UserService);
   cookieService: CookieService = inject(CookieService);
 
+  usernameExists: boolean = false;
+
   constructor(private router: Router){}
 
   registerForm = new FormGroup({
@@ -54,6 +56,15 @@ export class RegistroComponent {
     ]),
   });
 
+  ngOnInit(): void {
+    if (this.userSignalService.user().id) {
+      this.router.navigate(['/login']);
+    }
+    this.registerForm.controls.username.valueChanges.subscribe((value) => {
+      this.checkUsernameExists(value || '');
+    });
+  }
+  
   getNameErrorMessage() {
     if (this.registerForm.controls.name.hasError('required')) {
       return 'Debes introducir un nombre';
@@ -97,13 +108,7 @@ export class RegistroComponent {
   }
 
   getUserNameRegisteredErrorMessage() {
-    this.userService.findAll().subscribe((users: User[]) => {
-      if (users.find((user) => user.username === this.registerForm.controls.username.value)) {
-        return 'El nombre de usuario ya está registrado';
-      }else{
-        return '';
-      }
-    });
+    return this.usernameExists ? 'El nombre de usuario ya está registrado' : '';
   }
 
   getEmailErrorMessage() {
@@ -180,11 +185,12 @@ export class RegistroComponent {
     this.cookieService.set('user', JSON.stringify(user));
   }
 
-  userSignalService: UserSignalService = inject(UserSignalService);
-  ngOnInit(): void {
-    if (this.userSignalService.user().id) {
-      this.router.navigate(["/login"])
-    }
+  checkUsernameExists(username: string) {
+    this.userService.findAll().subscribe((users: User[]) => {
+      this.usernameExists = users.some((user) => user.username === username);
+    });
   }
+
+  userSignalService: UserSignalService = inject(UserSignalService);
 
   }
