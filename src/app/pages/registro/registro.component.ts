@@ -96,6 +96,16 @@ export class RegistroComponent {
       : '';
   }
 
+  getUserNameRegisteredErrorMessage() {
+    this.userService.findAll().subscribe((users: User[]) => {
+      if (users.find((user) => user.username === this.registerForm.controls.username.value)) {
+        return 'El nombre de usuario ya está registrado';
+      }else{
+        return '';
+      }
+    });
+  }
+
   getEmailErrorMessage() {
     if (this.registerForm.controls.email.hasError('required')) {
       return 'Debes introducir un correo electrónico';
